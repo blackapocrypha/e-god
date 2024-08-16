@@ -1,0 +1,90 @@
+package com.divination.domain.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class EightGodVO {
+
+    /**
+     * 年干
+     */
+    private String yearGan;
+
+    /**
+     * 月干
+     */
+    private String monthGan;
+
+    /**
+     * 日干
+     */
+    private String dayGan;
+
+    /**
+     * 时干
+     */
+    private String timeGan;
+
+    /**
+     * 年支
+     */
+    private String yearZhi;
+
+    /**
+     * 月支
+     */
+    private String monthZhi;
+
+    /**
+     * 日支
+     */
+    private String dayZhi;
+
+    /**
+     * 时支
+     */
+    private String timeZhi;
+
+    /**
+     * 天干十神信息
+     */
+    private List<GanTenGodVO> tenGodStatusList;
+
+    /**
+     * 地支藏干List  数组0 1 2 3分别对应年 月 日 时 地支的藏干信息
+     */
+    private List<HiddenGanVO> zhiHiddenGanList;
+
+    /**
+     * 天干合冲信息
+     */
+    private String ganSyzygyStatus;
+
+    /**
+     * 地支合冲状态
+     */
+    private String zhiSyzygyStatus;
+
+    /**
+     * 神煞
+     */
+    private List<List<String>> holyGeneralList;
+
+    /**
+     * 性别
+     */
+    private String gender;
+
+
+    /**
+     * 纳音
+     */
+    private List<String> voliceList;
+
+}
