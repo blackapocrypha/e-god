@@ -12,7 +12,8 @@ import LeftIndexTag from '@/components/LeftIndexTag.vue'
 
       <nav>
         <RouterLink to="/">主页</RouterLink>
-        <RouterLink to="/about">排盘</RouterLink>
+        <RouterLink to="/yearEight">排盘</RouterLink>
+        <RouterLink to="/timeEight">流年</RouterLink>
       </nav>
     </div>
   </header>

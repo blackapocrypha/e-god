@@ -181,7 +181,7 @@ const formartDate = (date: any) => {
 watchEffect(() => {
   userInfoData.birth = formartDate(info.birth)
   userInfoData.gender = info.gender
-  getEight(userInfoData)
+  //getEight(userInfoData)
 })
 
 onMounted(() => {

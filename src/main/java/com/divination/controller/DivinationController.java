@@ -2,6 +2,8 @@ package com.divination.controller;
 
 
 import com.divination.domain.dto.UserBirthDTO;
+import com.divination.domain.dto.UserTimeDTO;
+import com.divination.domain.vo.EightGodTimeVO;
 import com.divination.domain.vo.EightGodVO;
 import com.divination.service.EightGodService;
 import com.divination.util.JsonResult;
@@ -30,8 +32,15 @@ public class DivinationController {
         return eightGodService.getEightGodCount(userBirthDTO);
     }
 
-
-
+    /**
+     * 排大运
+     * @param timeDTO
+     * @return
+     */
+    @GetMapping("/getLucky")
+    public JsonResult<EightGodTimeVO> getEightTime(@ModelAttribute UserTimeDTO timeDTO){
+        return eightGodService.getEightGodTime(timeDTO);
+    }
 
     /**
      * 表单提交 Date类型数据绑定

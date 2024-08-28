@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class GanUtil {
 
@@ -145,6 +146,9 @@ public class GanUtil {
         List<HiddenGanVO> list = new ArrayList<>();
 
         // 分别取年月日时支里的藏干，填充十神
+        if(Objects.nonNull(yearZhi)){
+
+
         HiddenGanVO year = getHiddenGanByZhi(yearZhi);
         year.setHeightGodName(tenGodVOMap.get(year.getHeight()).getGod());
         if(Objects.nonNull(year.getMiddle())){
@@ -153,8 +157,11 @@ public class GanUtil {
         if(Objects.nonNull(year.getLow())){
             year.setLowGodName(tenGodVOMap.get(year.getLow()).getGod());
         }
-        list.add(year);
+        list.add(year);}else{
+            list.add(new HiddenGanVO());
+        }
 
+        if(Objects.nonNull(monthZhi)){
         HiddenGanVO month = getHiddenGanByZhi(monthZhi);
         month.setHeightGodName(tenGodVOMap.get(month.getHeight()).getGod());
         if(Objects.nonNull(month.getMiddle())){
@@ -163,8 +170,11 @@ public class GanUtil {
         if(Objects.nonNull(month.getLow())){
             month.setLowGodName(tenGodVOMap.get(month.getLow()).getGod());
         }
-        list.add(month);
+        list.add(month);}else{
+            list.add(new HiddenGanVO());
+        }
 
+        if(Objects.nonNull(dayZhi)){
         HiddenGanVO day = getHiddenGanByZhi(dayZhi);
         day.setHeightGodName(tenGodVOMap.get(day.getHeight()).getGod());
         if(Objects.nonNull(day.getMiddle())){
@@ -173,8 +183,11 @@ public class GanUtil {
         if(Objects.nonNull(day.getLow())){
             day.setLowGodName(tenGodVOMap.get(day.getLow()).getGod());
         }
-        list.add(day);
+        list.add(day);}else{
+            list.add(new HiddenGanVO());
+        }
 
+        if(Objects.nonNull(timeZhi)){
         HiddenGanVO time = getHiddenGanByZhi(timeZhi);
         time.setHeightGodName(tenGodVOMap.get(time.getHeight()).getGod());
         if(Objects.nonNull(time.getMiddle())){
@@ -184,7 +197,9 @@ public class GanUtil {
             time.setLowGodName(tenGodVOMap.get(time.getLow()).getGod());
         }
         list.add(time);
-
+        }else{
+            list.add(new HiddenGanVO());
+        }
 
         return list;
     }
@@ -229,6 +244,8 @@ public class GanUtil {
         if(list.contains("戊") && list.contains("癸")){
             stringBuilder.append("戊癸合火  ");
         }
+
+
 
         return stringBuilder.toString();
     }

@@ -40,7 +40,7 @@ const subForm = () => {
   info.setGender(form.gender)
   console.log('更换日期：' + info.birth)
   route.push({
-    path: '/about',
+    path: '/yearEight',
     replace: true
   })
 }

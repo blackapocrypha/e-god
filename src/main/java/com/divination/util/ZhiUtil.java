@@ -4,6 +4,7 @@ import com.nlf.calendar.Lunar;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 地支工具类
@@ -145,6 +146,20 @@ public class ZhiUtil {
         }
         if(list.contains("戌") && list.contains("未")){
             stringBuilder.append("未戌破  ");
+        }
+
+        // 辰午酉亥 自刑
+        if(list.stream().filter(f->f.equals("午")).collect(Collectors.toList()).size()>=2){
+            stringBuilder.append("午午自刑  ");
+        }
+        if(list.stream().filter(f->f.equals("辰")).collect(Collectors.toList()).size()>=2){
+            stringBuilder.append("辰辰自刑  ");
+        }
+        if(list.stream().filter(f->f.equals("酉")).collect(Collectors.toList()).size()>=2){
+            stringBuilder.append("酉酉自刑  ");
+        }
+        if(list.stream().filter(f->f.equals("亥")).collect(Collectors.toList()).size()>=2){
+            stringBuilder.append("亥亥自刑  ");
         }
 
         return stringBuilder.toString();
