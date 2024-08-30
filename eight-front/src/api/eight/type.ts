@@ -54,6 +54,15 @@ export interface EightGodVO {
    * 日支
    */
   dayZhi: string
+
+  /**
+   * 日干颜色
+   */
+  dayGanColor: string
+  /**
+   * 日支颜色
+   */
+  dayZhiColor: string
   /**
    * 天干合冲信息
    */
@@ -75,6 +84,14 @@ export interface EightGodVO {
    */
   monthZhi: string
   /**
+   * 月干-颜色
+   */
+  monthGanColor: string
+  /**
+   * 月支-颜色
+   */
+  monthZhiColor: string
+  /**
    * 天干十神信息
    */
   tenGodStatusList: TenGodStatusList[]
@@ -86,6 +103,15 @@ export interface EightGodVO {
    * 时支
    */
   timeZhi: string
+
+  /**
+   * 时干颜色
+   */
+  timeGanColor: string
+  /**
+   * 时支颜色
+   */
+  timeZhiColor: string
   /**
    * 纳音
    */
@@ -98,6 +124,14 @@ export interface EightGodVO {
    * 年支
    */
   yearZhi: string
+  /**
+   * 年干颜色
+   */
+  yearGanColor: string
+  /**
+   * 年支颜色
+   */
+  yearZhiColor: string
   /**
    * 地支藏干List  数组0 1 2 3分别对应年 月 日 时 地支的藏干信息
    */
@@ -162,6 +196,14 @@ export interface EightGodTimeVO {
    */
   dayZhi: string
   /**
+   * 日干颜色
+   */
+  dayGanColor: string
+  /**
+   * 日支颜色
+   */
+  dayZhiColor: string
+  /**
    * 天干合冲信息
    */
   ganSyzygyStatus: string
@@ -177,6 +219,14 @@ export interface EightGodTimeVO {
    * 月支
    */
   monthZhi: string
+  /**
+   * 月干颜色
+   */
+  monthGanColor: string
+  /**
+   * 月支颜色
+   */
+  monthZhiColor: string
   /**
    * 天干十神信息
    */
@@ -205,49 +255,97 @@ export interface EightGodTimeVO {
    */
   timeDayGan: string
   /**
+   * 流年 - 日干颜色
+   */
+  timeDayGanColor: string
+  /**
    * 流年 - 日支
    */
   timeDayZhi: string
+  /**
+   * 流年 - 日支颜色
+   */
+  timeDayZhiColor: string
   /**
    * 时干
    */
   timeGan: string
   /**
-   * 流年 - 大运
+   * 时干颜色
+   */
+  timeGanColor: string
+  /**
+   * 流年 - 大运干
    */
   timeLuckyGan: string
   /**
-   * 流年 - 大运
+   * 流年 - 大运干颜色
+   */
+  timeLuckyGanColor: string
+  /**
+   * 流年 - 大运支
    */
   timeLuckyZhi: string
+  /**
+   * 流年 - 大运支颜色
+   */
+  timeLuckyZhiColor: string
   /**
    * 流年 - 月干
    */
   timeMonthGan: string
   /**
+   * 流年 - 月干颜色
+   */
+  timeMonthGanColor: string
+  /**
    * 流年 - 月支
    */
   timeMonthZhi: string
+  /**
+   * 流年 - 月支颜色
+   */
+  timeMonthZhiColor: string
   /**
    * 流年 - 年干
    */
   timeYearGan: string
   /**
+   * 流年 - 年干颜色
+   */
+  timeYearGanColor: string
+  /**
    * 流年 - 年支
    */
   timeYearZhi: string
+  /**
+   * 流年 - 年支颜色
+   */
+  timeYearZhiColor: string
   /**
    * 时支
    */
   timeZhi: string
   /**
+   * 时支颜色
+   */
+  timeZhiColor: string
+  /**
    * 年干
    */
   yearGan: string
   /**
+   * 年干颜色
+   */
+  yearGanColor: string
+  /**
    * 年支
    */
   yearZhi: string
+  /**
+   * 年支颜色
+   */
+  yearZhiColor: string
   /**
    * 地支藏干List  数组0 1 2 3分别对应年 月 日 时 地支的藏干信息
    */

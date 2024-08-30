@@ -35,7 +35,7 @@ public class EightGodServiceImpl implements EightGodService {
         }
 
 
-        // 1 取到八字
+        // 1 取到八字并着色
         Lunar lunar = new Lunar(userBirthDTO.getBirth());
         godVO.setYearGan(lunar.getYearGan());
         godVO.setMonthGan(lunar.getMonthGan());
@@ -45,6 +45,14 @@ public class EightGodServiceImpl implements EightGodService {
         godVO.setMonthZhi(lunar.getMonthZhi());
         godVO.setDayZhi(lunar.getDayZhi());
         godVO.setTimeZhi(lunar.getTimeZhi());
+        godVO.setYearGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(lunar.getYearGan()));
+        godVO.setMonthGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(lunar.getMonthGan()));
+        godVO.setDayGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(lunar.getDayGan()));
+        godVO.setTimeGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(lunar.getTimeGan()));
+        godVO.setYearZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(lunar.getYearZhi()));
+        godVO.setMonthZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(lunar.getMonthZhi()));
+        godVO.setDayZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(lunar.getDayZhi()));
+        godVO.setTimeZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(lunar.getTimeZhi()));
 
         // 2 取到天干对应十神
         List<GanTenGodVO> ganGodVOList = TenGodUtil.getGanGodVOList(godVO.getDayGan());
@@ -293,6 +301,17 @@ public class EightGodServiceImpl implements EightGodService {
         String zhiSyzygyStatus = ZhiUtil.findZhiSyzygyStatus(zhiList, lunar);
         vo.setZhiSyzygyStatus(zhiSyzygyStatus);
 
+
+        // 6载入流年流月流日大运的颜色
+        vo.setTimeLuckyGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(vo.getTimeLuckyGan()));
+        vo.setTimeYearGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(vo.getTimeYearGan()));
+        vo.setTimeMonthGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(vo.getTimeMonthGan()));
+        vo.setTimeDayGanColor(FiveEnergyUtil.getFiveEnergyColorByGan(vo.getTimeDayGan()));
+
+        vo.setTimeLuckyZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(vo.getTimeLuckyZhi()));
+        vo.setTimeYearZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(vo.getTimeYearZhi()));
+        vo.setTimeMonthZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(vo.getTimeMonthZhi()));
+        vo.setTimeDayZhiColor(FiveEnergyUtil.getFiveEnergyColorByZhi(vo.getTimeDayZhi()));
 
         result.buildTrue();
         result.setData(vo);

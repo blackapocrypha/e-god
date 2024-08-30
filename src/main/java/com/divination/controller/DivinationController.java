@@ -34,8 +34,8 @@ public class DivinationController {
 
     /**
      * 排大运
-     * @param timeDTO
-     * @return
+     * @param timeDTO   大运入参
+     * @return JsonResult<EightGodVO> 大运信息
      */
     @GetMapping("/getLucky")
     public JsonResult<EightGodTimeVO> getEightTime(@ModelAttribute UserTimeDTO timeDTO){

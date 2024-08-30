@@ -17,9 +17,19 @@ public class EightGodTimeVO {
     private String timeLuckyGan;
 
     /**
+     * 流年 - 大运颜色
+     */
+    private String timeLuckyGanColor;
+
+    /**
      * 流年 - 年干
      */
     private String timeYearGan;
+
+    /**
+     * 流年 - 年干颜色
+     */
+    private String timeYearGanColor;
 
     /**
      * 流年 - 月干
@@ -27,11 +37,19 @@ public class EightGodTimeVO {
     private String timeMonthGan;
 
     /**
+     * 流年 - 月干颜色
+     */
+    private String timeMonthGanColor;
+
+    /**
      * 流年 - 日干
      */
     private String timeDayGan;
 
-
+    /**
+     * 流年 - 日干颜色
+     */
+    private String timeDayGanColor;
 
 
     /**
@@ -80,9 +98,19 @@ public class EightGodTimeVO {
     private String timeLuckyZhi;
 
     /**
+     * 流年 - 大运颜色
+     */
+    private String timeLuckyZhiColor;
+
+    /**
      * 流年 - 年支
      */
     private String timeYearZhi;
+
+    /**
+     * 流年 - 年支颜色
+     */
+    private String timeYearZhiColor;
 
     /**
      * 流年 - 月支
@@ -90,10 +118,59 @@ public class EightGodTimeVO {
     private String timeMonthZhi;
 
     /**
+     * 流年 - 月支颜色
+     */
+    private String timeMonthZhiColor;
+
+    /**
      * 流年 - 日支
      */
     private String timeDayZhi;
 
+    /**
+     * 流年 - 日支颜色
+     */
+    private String timeDayZhiColor;
+
+    /**
+     * 年干-颜色
+     */
+    private String yearGanColor;
+
+    /**
+     * 月干-颜色
+     */
+    private String monthGanColor;
+
+    /**
+     * 日干-颜色
+     */
+    private String dayGanColor;
+
+    /**
+     * 时干-颜色
+     */
+    private String timeGanColor;
+
+    /**
+     * 年支-颜色
+     */
+    private String yearZhiColor;
+
+    /**
+     * 月支-颜色
+     */
+    private String monthZhiColor;
+
+    /**
+     * 日支-颜色
+     */
+    private String dayZhiColor;
+
+    /**
+     * 时支-颜色
+     */
+    private String timeZhiColor;
 
     /**
      * 天干十神信息

@@ -51,6 +51,48 @@ public class EightGodVO {
      */
     private String timeZhi;
 
+
+    /**
+     * 年干-颜色
+     */
+    private String yearGanColor;
+
+    /**
+     * 月干-颜色
+     */
+    private String monthGanColor;
+
+    /**
+     * 日干-颜色
+     */
+    private String dayGanColor;
+
+    /**
+     * 时干-颜色
+     */
+    private String timeGanColor;
+
+    /**
+     * 年支-颜色
+     */
+    private String yearZhiColor;
+
+    /**
+     * 月支-颜色
+     */
+    private String monthZhiColor;
+
+    /**
+     * 日支-颜色
+     */
+    private String dayZhiColor;
+
+    /**
+     * 时支-颜色
+     */
+    private String timeZhiColor;
+
+
     /**
      * 天干十神信息
      */

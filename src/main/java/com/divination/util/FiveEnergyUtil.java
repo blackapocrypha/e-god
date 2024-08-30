@@ -23,9 +23,13 @@ public class FiveEnergyUtil {
      */
     public static String getFiveEnergyByGan(String gan){
         Integer index = null;
+        // 防止地支误传进来
+        if(ConstantUtil.zhiList.contains(gan)){
+            return getFiveEnergyColorByZhi(gan);
+        }
         for (int i = 0; i < ConstantUtil.ganList.size(); i++) {
             String  g= ConstantUtil.ganList.get(i);
-            if(g.equals(gan)){
+            if(g.equals(gan.trim())){
                 index = i;
                 break;
             }
@@ -50,6 +54,26 @@ public class FiveEnergyUtil {
     }
 
     /**
+     * 根据天干返回对应颜色
+     * @param gan 天干
+     * @return String
+     */
+    public static String getFiveEnergyColorByGan(String gan){
+        String fiveEnergyByGan = getFiveEnergyByGan(gan);
+        if(FiveEnergyEnum.TREE.getName().equals(fiveEnergyByGan)){
+            return "color: green";
+        }else if(FiveEnergyEnum.FIRE.getName().equals(fiveEnergyByGan)){
+            return "color: red";
+        }else if(FiveEnergyEnum.SOIL.getName().equals(fiveEnergyByGan)){
+            return "color: black";
+        }else if(FiveEnergyEnum.GOLD.getName().equals(fiveEnergyByGan)){
+            return "color: gold";
+        }else{
+            return "color: Cyan";
+        }
+    }
+
+    /**
      * 根据天干获取五行元素code
      * @param gan 天干
      * @return String
@@ -67,11 +91,31 @@ public class FiveEnergyUtil {
     public static String getFiveEnergyByZhi(String zhi){
         for (int i = 0; i < ConstantUtil.zhiList.size(); i++) {
             String z = ConstantUtil.zhiList.get(i);
-            if(z.equals(zhi)){
+            if(z.equals(zhi.trim())){
                 return ConstantUtil.zhiEnergyList.get(i);
             }
         }
         return null;
+    }
+
+    /**
+     * 根据地支获取对应五行的颜色
+     * @param zhi 地支
+     * @return String
+     */
+    public static String getFiveEnergyColorByZhi(String zhi){
+        String fiveEnergyByZhi = getFiveEnergyByZhi(zhi);
+        if(FiveEnergyEnum.TREE.getName().equals(fiveEnergyByZhi)){
+            return "color: green";
+        }else if(FiveEnergyEnum.FIRE.getName().equals(fiveEnergyByZhi)){
+            return "color: red";
+        }else if(FiveEnergyEnum.SOIL.getName().equals(fiveEnergyByZhi)){
+            return "color: black";
+        }else if(FiveEnergyEnum.GOLD.getName().equals(fiveEnergyByZhi)){
+            return "color: gold";
+        }else{
+            return "color: Cyan";
+        }
     }
 
     /**

@@ -23,19 +23,35 @@
     <!--天干-->
     <el-row :gutter="1">
       <el-col :span="4" class="topColum" style="font-size: 16px"> 天干:</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.yearGan }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.monthGan }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.dayGan }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.timeGan }}</el-col>
+      <el-col :span="4" class="ganColum" :style="eightData.yearGanColor">
+        {{ eightData.yearGan }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.monthGanColor">
+        {{ eightData.monthGan }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.dayGanColor">
+        {{ eightData.dayGan }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.timeGanColor">
+        {{ eightData.timeGan }}</el-col
+      >
     </el-row>
 
     <!--地支-->
     <el-row :gutter="1">
       <el-col :span="4" class="topColum" style="font-size: 16px"> 地支:</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.yearZhi }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.monthZhi }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.dayZhi }}</el-col>
-      <el-col :span="4" class="ganColum"> {{ eightData.timeZhi }}</el-col>
+      <el-col :span="4" class="ganColum" :style="eightData.yearZhiColor">
+        {{ eightData.yearZhi }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.monthZhiColor">
+        {{ eightData.monthZhi }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.dayZhiColor">
+        {{ eightData.dayZhi }}</el-col
+      >
+      <el-col :span="4" class="ganColum" :style="eightData.timeZhiColor">
+        {{ eightData.timeZhi }}</el-col
+      >
     </el-row>
 
     <!--藏干-->
@@ -118,17 +134,24 @@ let userInfoData = reactive<userInfo>({
 //@ts-ignore
 let eightData = reactive<EightGodVO>({
   dayGan: '',
+  dayGanColor: '',
   dayZhi: '',
+  dayZhiColor: '',
   ganSyzygyStatus: '',
   gender: '',
   holyGeneralList: [],
   monthGan: '',
+  monthGanColor: '',
   tenGodStatusList: [],
   timeGan: '',
+  timeGanColor: '',
   timeZhi: '',
+  timeZhiColor: '',
   voliceList: [],
   yearGan: '',
+  yearGanColor: '',
   yearZhi: '',
+  yearZhiColor: '',
   zhiHiddenGanList: [],
   zhiSyzygyStatus: ''
 })
