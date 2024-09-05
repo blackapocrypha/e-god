@@ -76,6 +76,10 @@ export interface EightGodVO {
    */
   holyGeneralList: Array<string[]>
   /**
+   * 空亡
+   */
+  fallList: Array<string[]>
+  /**
    * 月干
    */
   monthGan: string

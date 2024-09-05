@@ -29,7 +29,7 @@ public class FiveEnergyUtil {
         }
         for (int i = 0; i < ConstantUtil.ganList.size(); i++) {
             String  g= ConstantUtil.ganList.get(i);
-            if(g.equals(gan.trim())){
+            if(g.equals(gan)){
                 index = i;
                 break;
             }

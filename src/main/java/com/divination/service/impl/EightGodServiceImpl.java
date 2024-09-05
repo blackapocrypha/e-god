@@ -80,6 +80,14 @@ public class EightGodServiceImpl implements EightGodService {
         voiceList.add(EnergyVoiceUtil.getVoiceByGanZhi(godVO.getTimeGan()+godVO.getTimeZhi()));
         godVO.setVoliceList(voiceList);
 
+        // 7 取空亡
+        ArrayList<String> fallList = new ArrayList<>();
+        fallList.add(GanUtil.getFall(godVO.getYearGan()+godVO.getYearZhi()));
+        fallList.add(GanUtil.getFall(godVO.getMonthGan()+godVO.getMonthZhi()));
+        fallList.add(GanUtil.getFall(godVO.getDayGan()+godVO.getDayZhi()));
+        fallList.add(GanUtil.getFall(godVO.getTimeGan()+godVO.getTimeZhi()));
+        godVO.setFallList(fallList);
+
         jsonResult.buildTrue();
         jsonResult.setData(godVO);
         return jsonResult;

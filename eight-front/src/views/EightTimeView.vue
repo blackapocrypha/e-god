@@ -3,7 +3,14 @@
 <template>
   <div class="all">
     <div style="float: right; margin-bottom: 10px">
-      <el-button size="large" @click="openDialog">流月流日</el-button>
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="仅供参考，具体以节令划分为准"
+        placement="top"
+      >
+        <el-button size="large" @click="openDialog">流月流日</el-button>
+      </el-tooltip>
     </div>
     <!--四柱-->
     <el-row :gutter="1">

@@ -96,6 +96,15 @@
       </el-col>
     </el-row>
 
+    <!--空亡-->
+    <el-row :gutter="1">
+      <el-col :span="4" class="fallColum"> 空亡:</el-col>
+      <el-col :span="4" class="fallColum"> {{ eightData.fallList[0] }}</el-col>
+      <el-col :span="4" class="fallColum"> {{ eightData.fallList[1] }}</el-col>
+      <el-col :span="4" class="fallColum"> {{ eightData.fallList[2] }}</el-col>
+      <el-col :span="4" class="fallColum"> {{ eightData.fallList[3] }}</el-col>
+    </el-row>
+
     <!--天干合化-->
     <el-row :gutter="1">
       <el-col :span="4" class="ganStatusColum"> 天干合化:</el-col>
@@ -148,6 +157,7 @@ let eightData = reactive<EightGodVO>({
   timeZhi: '',
   timeZhiColor: '',
   voliceList: [],
+  fallList: [],
   yearGan: '',
   yearGanColor: '',
   yearZhi: '',
@@ -253,6 +263,10 @@ onMounted(() => {
     height: 40px;
     background-color: rgb(164, 166, 169);
   }
+  .fallColum {
+    height: 40px;
+    background-color: rgb(164, 166, 169);
+  }
   .shenShaColum {
     background-color: rgb(229, 233, 242);
     p {
@@ -263,11 +277,11 @@ onMounted(() => {
   }
   .ganStatusColum {
     height: 40px;
-    background-color: rgb(164, 166, 169);
+    background-color: rgb(229, 233, 242);
   }
   .zhiStatusColum {
     height: 40px;
-    background-color: rgb(229, 233, 242);
+    background-color: rgb(164, 166, 169);
   }
 }
 .el-row {

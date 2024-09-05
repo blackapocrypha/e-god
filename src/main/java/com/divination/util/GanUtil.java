@@ -249,4 +249,33 @@ public class GanUtil {
 
         return stringBuilder.toString();
     }
+
+    /**
+     * 获取空亡
+     * @param ganZhi 干支
+     * @return  空亡
+     */
+    public static String getFall(String ganZhi){
+        List<String> jiaziList = ConstantUtil.jiaziList;
+        Integer tempI = 0;
+        for (int i = 0; i < jiaziList.size(); i++) {
+            if(ganZhi.equals(jiaziList.get(i))){
+                tempI = i;break;
+            }
+        }
+
+        Integer flag = tempI/10;
+        String result = switch (flag) {
+            case 0 -> "戌亥";
+            case 1 -> "申酉";
+            case 2 -> "午未";
+            case 3 -> "辰巳";
+            case 4 -> "寅卯";
+            case 5 -> "子丑";
+            default -> "";
+        };
+
+        return result;
+
+    }
 }

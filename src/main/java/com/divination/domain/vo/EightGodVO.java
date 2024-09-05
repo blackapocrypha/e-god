@@ -129,4 +129,9 @@ public class EightGodVO {
      */
     private List<String> voliceList;
 
+    /**
+     * 空亡
+     */
+    private List<String> fallList;
+
 }

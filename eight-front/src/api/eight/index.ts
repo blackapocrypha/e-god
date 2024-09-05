@@ -1,5 +1,6 @@
 import request from '@/util/request'
 import type { userInfo, userTimeInfo, EightGodVO, EightGodTimeVO } from '@/api/eight/type'
+
 // 统一管理接口
 enum API {
   GET_EIGHT = '/getEight',
