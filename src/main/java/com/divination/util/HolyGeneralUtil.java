@@ -18,10 +18,12 @@ public class HolyGeneralUtil {
      * @param lunar 八字信息
      * @return
      */
-    public static List<List<String>> getHolyGeneral(Lunar lunar){
+    public static List<List<String>> getHolyGeneral(Lunar lunar,String gender){
         /**
          * 录入神煞：
-         * 天乙贵人，月德贵人，天德贵人，太极贵人，文昌贵人，国印贵人，驿马，劫煞，灾煞，桃花，华盖，血刃，学堂，词馆，将星，金舆，天医
+         * 天乙贵人，月德贵人，天德贵人，太极贵人，文昌贵人，国印贵人，天厨贵人,魁罡贵人 天赫贵人，
+         * 驿马，劫煞，灾煞，桃花，华盖，血刃，学堂，词馆，将星，金舆，天医，红鸾，六厄，披麻
+         * 参考：http://www.360doc.com/content/23/0613/20/80226760_1084622953.shtml#google_vignette
          */
 
         List<List<String>> list = new ArrayList<>();
@@ -168,6 +170,67 @@ public class HolyGeneralUtil {
                 if("庚".equals(ganList.get(i))){
                     list.get(i).add("天德贵人");
                 }
+            }
+        }
+
+        /**
+         * 天厨贵人
+         * "甲巳", "乙午", "丙巳", "丁午","戊申","己酉","庚亥","辛子","壬巳","癸午"
+         */
+        List<String> foodGodList = Arrays.asList("甲巳", "乙午", "丙巳", "丁午","戊申","己酉","庚亥","辛子","壬巳","癸午");
+        for (int i = 0; i < ganList.size(); i++) {
+            // 只判断年日两柱
+            if(i==1 || i==3){continue;}
+            String string = ganList.get(i);
+            for (String zhi : zhiList) {
+                String ganzhi = string+zhi;
+                if(foodGodList.contains(ganzhi)){
+                    list.get(i).add("天厨贵人");
+                }
+            }
+        }
+
+        /**
+         * 魁罡贵人
+         * "庚辰", "庚戌", "壬辰", "戊戌" 四日
+         */
+        List<String> ironGodList = Arrays.asList("庚辰", "庚戌", "壬辰", "戊戌");
+        for (int i = 0; i < ganList.size(); i++) {
+            // 只判断日柱
+            if(i!=2){continue;}
+            String string = ganList.get(i);
+            for (String zhi : zhiList) {
+                String ganzhi = string+zhi;
+                if(ironGodList.contains(ganzhi)){
+                    list.get(i).add("魁罡贵人");
+                }
+            }
+        }
+
+        /**
+         * 天赫贵人
+         * 春季寅、卯、辰月（农历正、二、三月）出生人，若日主为戊寅，则就是命带天赦；
+         * 夏季巳、午、未月（农历四、五、六月）出生人，若日主为甲午，则就是命带天赦；
+         * 秋季申、酉、戌月（农历七、八、九月）出生人，若日主为戊申，则就是命带天赦；
+         * 冬季亥、子、丑月（十、十一、十二月）出生人，若日主为甲子，则就是命带天赦
+         */
+        String tempMonthZhi = lunar.getMonthZhi();
+        String dayMaster = lunar.getDayGan()+lunar.getDayZhi();
+        if(Arrays.asList("寅","卯","辰").contains(tempMonthZhi)){
+            if(dayMaster.equals("戊寅")){
+                list.get(1).add("天赫贵人");
+            }
+        } else if(Arrays.asList("巳","午","未").contains(tempMonthZhi)){
+            if(dayMaster.equals("甲午")){
+                list.get(1).add("天赫贵人");
+            }
+        }else if(Arrays.asList("申","酉","戌").contains(tempMonthZhi)){
+            if(dayMaster.equals("戊申")){
+                list.get(1).add("天赫贵人");
+            }
+        }else if(Arrays.asList("亥","子","丑").contains(tempMonthZhi)){
+            if(dayMaster.equals("甲子")){
+                list.get(1).add("天赫贵人");
             }
         }
 
@@ -1036,7 +1099,470 @@ public class HolyGeneralUtil {
             }
         }
 
+        /**
+         * 红鸾
+         * 以出生年支查四支，见之者为是。如年支为子，地支中有卯，则为红鸾桃花。
+         * 如子见卯、丑见寅、寅见丑、卯见子、辰见亥、巳见戌，午见酉、未见申、申见未、酉见午、戌见巳、亥见辰等都是命中有红鸾
+         */
+        String tempYearZhi = lunar.getYearZhi();
+        if(tempYearZhi.equals("子")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("卯")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }else if(tempYearZhi.equals("丑")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("寅")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }else if(tempYearZhi.equals("寅")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("丑")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("卯")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("子")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("辰")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("亥")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("巳")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("戌")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("午")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("酉")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("未")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("申")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("申")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("未")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("酉")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("午")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }     else if(tempYearZhi.equals("戌")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("巳")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("亥")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("辰")){
+                    list.get(i).add("红鸾");break;
+                }
+            }
+        }
 
+        /**
+         * 天喜
+         * 以年支查其余三个地支，子见酉、丑见申、寅见未、卯见午、辰见巳、巳见辰；午见卯、未见寅、申见丑、酉见子、戌见亥、亥见戌。
+         */
+        if(tempYearZhi.equals("子")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("酉")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }else if(tempYearZhi.equals("丑")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("申")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }else if(tempYearZhi.equals("寅")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("未")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("卯")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("午")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("辰")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("巳")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("巳")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("辰")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("午")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("卯")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("未")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("寅")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("申")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("丑")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("酉")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("子")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }     else if(tempYearZhi.equals("戌")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("亥")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+        else if(tempYearZhi.equals("亥")){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("戌")){
+                    list.get(i).add("天喜");break;
+                }
+            }
+        }
+
+        /**
+         * 六厄
+         * 年支为申子辰的，地支见卯，就为六厄；
+         * 年支为寅午戌的，地支见酉，就是六厄；
+         * 年支为亥卯未的，地支见午，就是六厄；
+         * 年支为巳酉丑的，地支见子，就是六厄
+         */
+        if(Arrays.asList("申","子","辰").contains(lunar.getYearZhi())){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("卯")){
+                    list.get(i).add("六厄");
+                    break;
+                }
+            }
+        }
+        else if(Arrays.asList("寅","午","戌").contains(lunar.getYearZhi())){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("酉")){
+                    list.get(i).add("六厄");
+                    break;
+                }
+            }
+        }
+        else if(Arrays.asList("亥","卯","未").contains(lunar.getYearZhi())){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("午")){
+                    list.get(i).add("六厄");
+                    break;
+                }
+            }
+        }
+        else if(Arrays.asList("巳","酉","丑").contains(lunar.getYearZhi())){
+            for (int i = 1; i < zhiList.size(); i++) {
+                String zhiString = zhiList.get(i);
+                if(zhiString.equals("子")){
+                    list.get(i).add("六厄");
+                    break;
+                }
+            }
+        }
+
+
+        /**
+         * 披麻
+         * 子见酉，丑见戌，寅见亥，卯见子，辰见丑，
+         * 巳见寅，午见卯，未见辰，申见巳，酉见午，
+         * 戌见未，亥见申。
+         * 以年支或日支查余支。
+         */
+        List<String> parentLostList = Arrays.asList("子酉", "丑戌", "寅亥", "卯子","辰丑","巳寅","午卯","未辰","申巳","酉午","戌未","亥申");
+        for (int i = 0; i < zhiList.size(); i++) {
+            // 只判断年日两柱
+            if(i==1 || i==3){continue;}
+            String string = zhiList.get(i);
+            for (String zhi : zhiList) {
+                String ganzhi = string+zhi;
+                if(parentLostList.contains(ganzhi)){
+                    list.get(i).add("披麻");
+                }
+            }
+        }
+
+
+        /**
+         * 元辰
+         * 1、阳男阴女元辰
+         * 子年见未，丑年见申，寅年见酉，卯年见戌，辰年见亥，巳年见子，午年见丑，未年见寅，申年见卯，酉年见辰，戌年见巳，亥年见午。
+         *
+         * 2、阴男阳女元辰
+         * 子年见巳，丑年见午，寅年见未，卯年见申，辰年见酉，巳年见戌，午年见亥，未年见子，申年见丑，酉年见寅，戌年见卯，亥年见辰。
+         */
+        Integer yinYangByGan = YinYangUtil.getYinYangByGan(lunar.getDayGan());
+        if((gender.equals("乾造") && yinYangByGan==1) || (gender.equals("坤造") && yinYangByGan==0) ){
+            if(lunar.getYearZhi().equals("子")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("未".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }else if(lunar.getYearZhi().equals("丑")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("申".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }else if(lunar.getYearZhi().equals("寅")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("酉".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("卯")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("戌".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("辰")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("亥".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("巳")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("子".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("午")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("丑".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("未")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("寅".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("申")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("卯".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("酉")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("辰".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("戌")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("巳".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("亥")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("午".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+        }else{
+            if(lunar.getYearZhi().equals("子")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("巳".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }else if(lunar.getYearZhi().equals("丑")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("午".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }else if(lunar.getYearZhi().equals("寅")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("未".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("卯")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("申".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("辰")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("酉".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("巳")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("戌".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("午")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("亥".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("未")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("子".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("申")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("丑".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("酉")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("寅".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("戌")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("卯".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+            else if(lunar.getYearZhi().equals("亥")){
+                for (int i = 1; i < zhiList.size(); i++) {
+                    if("辰".equals(zhiList.get(i))){
+                        list.get(i).add("元辰");
+                        break;
+                    }
+                }
+            }
+        }
 
         //去重,同时最多只显示6个神煞
         for (int i = 0; i < list.size(); i++) {

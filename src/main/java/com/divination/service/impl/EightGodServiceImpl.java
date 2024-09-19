@@ -69,7 +69,7 @@ public class EightGodServiceImpl implements EightGodService {
         godVO.setZhiSyzygyStatus(zhiSyzygyStatus);
 
         // 5 取神煞
-        List<List<String>> holyGeneral = HolyGeneralUtil.getHolyGeneral(lunar);
+        List<List<String>> holyGeneral = HolyGeneralUtil.getHolyGeneral(lunar,godVO.getGender());
         godVO.setHolyGeneralList(holyGeneral);
 
         // 6 取纳音
