@@ -7,6 +7,7 @@ import com.nlf.calendar.Lunar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -22,6 +23,9 @@ public class FiveEnergyUtil {
      * @return String
      */
     public static String getFiveEnergyByGan(String gan){
+        if(Objects.isNull(gan)){
+            return null;
+        }
         Integer index = null;
         // 防止地支误传进来
         if(ConstantUtil.zhiList.contains(gan)){
@@ -89,6 +93,7 @@ public class FiveEnergyUtil {
      * @return String
      */
     public static String getFiveEnergyByZhi(String zhi){
+        if(Objects.isNull(zhi)){return null;}
         for (int i = 0; i < ConstantUtil.zhiList.size(); i++) {
             String z = ConstantUtil.zhiList.get(i);
             if(z.equals(zhi.trim())){
