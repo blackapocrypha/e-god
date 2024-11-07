@@ -144,6 +144,20 @@ export interface EightGodVO {
    * 地支合冲状态
    */
   zhiSyzygyStatus: string
+  /**
+   * 感情桃花位
+   */
+  loveInHome: string
+
+  /**
+   * 社会桃花位
+   */
+  loveInSociety: string
+
+  /**
+   * 文昌位
+   */
+  literature: string
   [property: string]: any
 }
 

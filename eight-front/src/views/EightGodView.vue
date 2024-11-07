@@ -29,9 +29,21 @@
       <el-col :span="4" class="ganColum" :style="eightData.monthGanColor">
         {{ eightData.monthGan }}</el-col
       >
+
       <el-col :span="4" class="ganColum" :style="eightData.dayGanColor">
-        {{ eightData.dayGan }}</el-col
-      >
+        <el-tooltip class="box-item" effect="dark" placement="top">
+          <template #content>
+            文昌位：
+            {{ eightData.literature }}
+            <br />姻缘桃花位:
+            {{ eightData.loveInHome }}
+            <br />
+            社会桃花位:
+            {{ eightData.loveInSociety }}
+          </template>
+          {{ eightData.dayGan }}
+        </el-tooltip>
+      </el-col>
       <el-col :span="4" class="ganColum" :style="eightData.timeGanColor">
         {{ eightData.timeGan }}</el-col
       >
@@ -214,7 +226,7 @@ const formartDate = (date: any) => {
 watchEffect(() => {
   userInfoData.birth = formartDate(info.birth)
   userInfoData.gender = info.gender
-  //getEight(userInfoData)
+  getEight(userInfoData)
 })
 
 onMounted(() => {

@@ -31,14 +31,14 @@ const info = useInfoStore()
 const route = useRouter()
 
 let form = reactive<userInfo>({
-  birth: new Date(),
+  birth: new Date('2000-01-01 00:00:00'),
   gender: '1'
 })
 
 const subForm = () => {
   info.setBirth(form.birth)
   info.setGender(form.gender)
-  console.log('更换日期：' + info.birth)
+
   route.push({
     path: '/yearEight',
     replace: true

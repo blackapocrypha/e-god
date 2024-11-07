@@ -134,4 +134,20 @@ public class EightGodVO {
      */
     private List<String> fallList;
 
+
+    /**
+     * 感情桃花位
+     */
+    private String loveInHome;
+
+    /**
+     * 社会桃花位
+     */
+    private String loveInSociety;
+
+    /**
+     * 文昌位
+     */
+    private String literature;
+
 }
