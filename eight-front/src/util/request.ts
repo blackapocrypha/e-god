@@ -5,7 +5,7 @@ import Qs from 'qs'
 import { ElMessage } from 'element-plus'
 //创建axios实例
 const request = axios.create({
-  baseURL: 'http://127.0.0.1:9369',
+  baseURL: 'http://124.71.96.193/prod-api',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
