@@ -26,4 +26,5 @@ public class TimeLuckyVO {
      * 大运名称
      */
     private String name;
+
 }

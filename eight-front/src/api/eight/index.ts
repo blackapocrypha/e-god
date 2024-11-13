@@ -1,10 +1,18 @@
 import request from '@/util/request'
-import type { userInfo, userTimeInfo, EightGodVO, EightGodTimeVO } from '@/api/eight/type'
+import type {
+  userInfo,
+  userTimeInfo,
+  EightGodVO,
+  EightGodTimeVO,
+  FullYearMonthDaysVO
+} from '@/api/eight/type'
+type FullVO = FullYearMonthDaysVO[]
 
 // 统一管理接口
 enum API {
   GET_EIGHT = '/getEight',
-  GET_LUCKY = '/getLucky'
+  GET_LUCKY = '/getLucky',
+  GET_FULLDAYS = '/getFullYearMonthDays'
 }
 
 // 获取八字排盘信息
@@ -29,3 +37,7 @@ export const apiGetLucky = (data: userTimeInfo) => {
 
   return request.get<EightGodTimeVO>(url)
 }
+
+// 获取当前年份全部流月流日
+export const getFullYearMonthDays = (data: number) =>
+  request.get<FullVO>(API.GET_FULLDAYS + '?year=' + data)

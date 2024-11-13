@@ -192,15 +192,6 @@ public class EightGodTimeVO {
      */
     private List<TimeLuckyVO> flowYearList;
 
-    /**
-     * 流月列表
-     */
-    private List<TimeLuckyVO> flowMonthList;
-
-    /**
-     * 流日列表
-     */
-    private List<TimeLuckyVO> flowDayList;
 
 
     /**

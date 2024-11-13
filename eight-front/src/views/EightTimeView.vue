@@ -3,12 +3,7 @@
 <template>
   <div class="all">
     <div style="float: right; margin-bottom: 10px">
-      <el-tooltip
-        class="box-item"
-        effect="dark"
-        content="仅供参考，具体以节令划分为准"
-        placement="top"
-      >
+      <el-tooltip class="box-item" effect="dark" content="月份具体以节令划分为准" placement="top">
         <el-button size="large" @click="openDialog">流月流日</el-button>
       </el-tooltip>
     </div>
@@ -175,20 +170,17 @@
         <el-form-item label="流月">
           <el-radio-group v-model="userInfoData.month">
             <el-radio
-              v-for="item in eightData.flowMonthList"
+              v-for="item in fullYearMonthDaysArray"
               @click="freshFlowDayWhenChosenMonth()"
-              :value="item.startYear"
-              >{{ item.name }}({{ item.startYear }}月)</el-radio
+              :value="item.month"
+              >{{ item.monthGanZhi }}({{ item.month }}月)</el-radio
             >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="流日">
-          <el-radio-group v-model="userInfoData.day">
-            <el-radio
-              style="width: 120px"
-              v-for="item in eightData.flowDayList"
-              :value="item.startYear"
-              >{{ item.name }} ({{ item.startYear }})</el-radio
+          <el-radio-group v-model="specialFLowDay">
+            <el-radio style="width: 120px" v-for="item in fullDays" :value="item.date"
+              >{{ item.dayGanZhi }} ({{ item.date?.substring(5, 10) }})</el-radio
             >
           </el-radio-group>
         </el-form-item>
@@ -197,7 +189,7 @@
 
       <div class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="getLucky(userInfoData)"> 确定 </el-button>
+        <el-button type="primary" @click="getDayLucky()"> 确定 </el-button>
       </div>
     </template>
   </el-dialog>
@@ -210,16 +202,24 @@ import { ElMessage } from 'element-plus'
 import { useInfoStore } from '@/stores/info'
 import { REQ_SUCCESS } from '@/util/resultStatus'
 import type { jsonResult } from '@/api/common/type'
-import type { userTimeInfo, EightGodTimeVO } from '@/api/eight/type'
-import { apiGetLucky } from '@/api/eight/index'
+import type {
+  userTimeInfo,
+  EightGodTimeVO,
+  FullYearMonthDaysVO,
+  TimeLuckyMonthDayVO
+} from '@/api/eight/type'
+import { apiGetLucky, getFullYearMonthDays } from '@/api/eight/index'
 
 const info = useInfoStore()
 const selectedLuckyIndex = ref<number>()
 const selectedFlowYearIndex = ref<number | any>()
 const selectedFlowMonthIndex = ref<number>()
 const selectedFlowDayIndex = ref<number>()
+const specialFLowDay = ref<string | any>()
 
 const dialogFormVisible = ref(false)
+const fullYearMonthDaysArray = ref<FullYearMonthDaysVO[]>([])
+const fullDays = ref<TimeLuckyMonthDayVO[]>([])
 
 // 查询数据
 let userInfoData = reactive<userTimeInfo>({
@@ -290,12 +290,48 @@ const getLucky = async (queryData: userTimeInfo) => {
     if (eightData.timeLuckyGan != null) {
       userInfoData.lucky = eightData.timeLuckyGan + eightData.timeLuckyZhi
     }
+    eightData.monthGan = result.data.monthGan
+    eightData.monthZhi = result.data.monthZhi
   }
 
   findLuckyZone()
   findFlowYearZone()
   findFlowMonthZone()
   findFlowDayZone()
+}
+
+// 查询今年流月流日数据
+const getFullDays = async (year: number) => {
+  //@ts-ignore
+  let result: jsonResult | any = await getFullYearMonthDays(year)
+  if (result.status === REQ_SUCCESS) {
+    fullYearMonthDaysArray.value.length = 0
+    //@ts-ignore
+    fullYearMonthDaysArray.value = [...result.data]
+    fullYearMonthDaysArray.value.forEach((element) => {
+      if (userInfoData.month == element.month) {
+        fullDays.value.length = 0
+        fullDays.value = [...element.days]
+        return
+      }
+    })
+  }
+}
+
+// 当查询流日时单独处理日期
+const getDayLucky = () => {
+  if (specialFLowDay.value == null) {
+    ElMessage({
+      message: '请选择流日',
+      type: 'warning'
+    })
+  } else {
+    const dateObject = new Date(specialFLowDay.value)
+    userInfoData.year = dateObject.getFullYear()
+    userInfoData.month = dateObject.getMonth() + 1
+    userInfoData.day = dateObject.getDate()
+    getLucky(userInfoData)
+  }
 }
 
 // 选中月份时同步更新流日
@@ -311,11 +347,18 @@ const freshFlowDayWhenChosenMonth = async () => {
       userInfoData.lucky = eightData.timeLuckyGan + eightData.timeLuckyZhi
     }
   }
-
+  specialFLowDay.value = null
   findLuckyZone()
   findFlowYearZone()
   findFlowMonthZone()
   findFlowDayZone()
+  fullYearMonthDaysArray.value.forEach((element) => {
+    if (userInfoData.month == element.month) {
+      fullDays.value.length = 0
+      fullDays.value = [...element.days]
+      return
+    }
+  })
 }
 
 // 根据对应天干找到十神
@@ -368,17 +411,17 @@ const findFlowYearZone = () => {
 // 默认选中当前流月所在的月份
 const findFlowMonthZone = () => {
   if (userInfoData.month == null) {
-    for (let i = 0; i < eightData.flowMonthList.length; i++) {
-      if (eightData.flowMonthList[i].startYear == new Date().getMonth() + 1) {
+    for (let i = 0; i < fullYearMonthDaysArray.value.length; i++) {
+      if (fullYearMonthDaysArray.value[i].month == new Date().getMonth() + 1) {
         selectedFlowMonthIndex.value = i
-        userInfoData.month = eightData.flowMonthList[i].startYear
+        userInfoData.month = fullYearMonthDaysArray.value[i].month
       }
     }
   } else {
-    for (let i = 0; i < eightData.flowMonthList.length; i++) {
-      if (eightData.flowMonthList[i].startYear == userInfoData.month) {
+    for (let i = 0; i < fullYearMonthDaysArray.value.length; i++) {
+      if (fullYearMonthDaysArray.value[i].month == userInfoData.month) {
         selectedFlowMonthIndex.value = i
-        userInfoData.month = eightData.flowMonthList[i].startYear
+        userInfoData.month = fullYearMonthDaysArray.value[i].month
       }
     }
   }
@@ -386,17 +429,17 @@ const findFlowMonthZone = () => {
 // 默认选中当前流日所在的日期
 const findFlowDayZone = () => {
   if (userInfoData.day == null) {
-    for (let i = 0; i < eightData.flowDayList.length; i++) {
-      if (eightData.flowDayList[i].startYear == new Date().getDay()) {
+    for (let i = 0; i < fullDays.value.length; i++) {
+      if (fullDays.value[i].day == new Date().getDay()) {
         selectedFlowDayIndex.value = i
-        userInfoData.day = eightData.flowDayList[i].startYear
+        userInfoData.day = fullDays.value[i].day
       }
     }
   } else {
-    for (let i = 0; i < eightData.flowDayList.length; i++) {
-      if (eightData.flowDayList[i].startYear == userInfoData.day) {
-        selectedFlowDayIndex.value = i
-        userInfoData.day = eightData.flowDayList[i].startYear
+    for (let i = 0; i < fullDays.value.length; i++) {
+      if (fullDays.value[i].day == userInfoData.day) {
+        selectedFlowDayIndex.value = fullDays.value[i].day
+        userInfoData.day = fullDays.value[i].day
       }
     }
   }
@@ -428,6 +471,9 @@ const pickFlowYear = (index: any, data: string | undefined, type: number) => {
   eightData.timeMonthZhi = ''
   eightData.timeDayGan = ''
   eightData.timeDayZhi = ''
+  specialFLowDay.value = null
+  userInfoData.day = null
+  userInfoData.month = null
   selectedFlowYearIndex.value = index
   for (let i = 0; i < eightData.flowYearList.length; i++) {
     if (eightData.flowYearList[i].name === data) {
@@ -437,6 +483,7 @@ const pickFlowYear = (index: any, data: string | undefined, type: number) => {
       getLucky(userInfoData)
     }
   }
+  getFullDays(userInfoData.year)
 }
 
 // 清空缓存数据
@@ -488,6 +535,9 @@ onMounted(() => {
   userInfoData.birth = formartDate(info.birth)
   userInfoData.gender = info.gender
   getLucky(userInfoData)
+  let year: number = new Date().getFullYear()
+  userInfoData.year = year
+  getFullDays(year)
 })
 </script>
 

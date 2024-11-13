@@ -260,15 +260,6 @@ export interface EightGodTimeVO {
   flowYearList: TenLuckyList[]
 
   /**
-   * 流月
-   */
-  flowMonthList: TenLuckyList[]
-
-  /**
-   * 流日
-   */
-  flowDayList: TenLuckyList[]
-  /**
    * 流年 - 日干
    */
   timeDayGan: string
@@ -388,5 +379,44 @@ export interface TenLuckyList {
    * 开始年份
    */
   startYear?: number
+  [property: string]: any
+}
+
+export interface TimeLuckyMonthDayVO {
+  /**
+   * 日
+   */
+  day?: number
+  /**
+   * 日干支
+   */
+  dayGanZhi?: string
+  /**
+   * 完整日期
+   */
+  date?: string
+  [property: string]: any
+}
+
+export interface FullYearMonthDaysVO {
+  /**
+   * 年
+   */
+  year?: number
+
+  /**
+   * 月
+   */
+  month?: number
+
+  /**
+   * 月干支
+   */
+  monthGanZhi?: string
+
+  /**
+   * 流日
+   */
+  days?: TimeLuckyMonthDayVO[]
   [property: string]: any
 }
