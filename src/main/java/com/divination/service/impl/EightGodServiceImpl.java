@@ -88,10 +88,11 @@ public class EightGodServiceImpl implements EightGodService {
         fallList.add(GanUtil.getFall(godVO.getTimeGan() + godVO.getTimeZhi()));
         godVO.setFallList(fallList);
 
-        // 8 取桃花位 和 文昌位
+        // 8 取桃花位 和 文昌位 和 袁天罡称骨口诀
         godVO.setLoveInHome(LoveUtil.getLove(godVO.getDayZhi()));
         godVO.setLoveInSociety(LoveUtil.getLove(godVO.getYearZhi()));
         godVO.setLiterature(GodInLiteratureUtil.getGodInLiterature(godVO.getDayGan()) + "," + GodInLiteratureUtil.getGodInLiterature(godVO.getYearGan()));
+        godVO.setYuanTianGang(YuanTianGangUtil.getYuanTianGang(userBirthDTO.getBirth(),userBirthDTO.getGender()));
 
         jsonResult.buildTrue();
         jsonResult.setData(godVO);

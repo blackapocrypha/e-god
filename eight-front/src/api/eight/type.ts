@@ -158,6 +158,11 @@ export interface EightGodVO {
    * 文昌位
    */
   literature: string
+
+  /**
+   * 袁天罡称骨
+   */
+  yuanTianGang: string
   [property: string]: any
 }
 

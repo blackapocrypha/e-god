@@ -132,6 +132,14 @@
         {{ eightData.zhiSyzygyStatus }}
       </el-col>
     </el-row>
+
+    <!--袁天罡-->
+    <el-row :gutter="1">
+      <el-col :span="4" class="yuanTianGang"> 袁天罡称骨:</el-col>
+      <el-col :span="16" class="yuanTianGang" style="text-align: left; font-size: 15px">
+        {{ eightData.yuanTianGang }}
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -175,7 +183,8 @@ let eightData = reactive<EightGodVO>({
   yearZhi: '',
   yearZhiColor: '',
   zhiHiddenGanList: [],
-  zhiSyzygyStatus: ''
+  zhiSyzygyStatus: '',
+  yuanTianGang: ''
 })
 
 // 查询菜单数据
@@ -245,7 +254,7 @@ onMounted(() => {
   width: 100%;
 
   .topColum {
-    height: 40px;
+    //height: 40px;
     background-color: rgb(164, 166, 169);
     //border: 1px solid rgb(167, 160, 160);
   }
@@ -294,6 +303,10 @@ onMounted(() => {
   .zhiStatusColum {
     height: 40px;
     background-color: rgb(164, 166, 169);
+  }
+  .yuanTianGang {
+    height: 40px;
+    background-color: rgb(229, 233, 242);
   }
 }
 .el-row {

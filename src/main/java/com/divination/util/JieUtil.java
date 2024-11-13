@@ -8,6 +8,9 @@ import java.util.List;
  */
 public class JieUtil {
 
+    /**
+     * 节
+     */
     public static List<String> jieList = Arrays.asList("立冬","大雪","小寒","立春","惊蛰","清明","立夏","芒种","小暑", "立秋","白露","寒露");
 
     /**

@@ -150,4 +150,9 @@ public class EightGodVO {
      */
     private String literature;
 
+    /**
+     * 袁天罡称骨
+     */
+    private String yuanTianGang;
+
 }
