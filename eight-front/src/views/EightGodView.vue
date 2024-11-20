@@ -33,6 +33,8 @@
       <el-col :span="4" class="ganColum" :style="eightData.dayGanColor">
         <el-tooltip class="box-item" effect="dark" placement="top">
           <template #content>
+            {{ eightData.fateStart }}
+            <br />
             文昌位：
             {{ eightData.literature }}
             <br />姻缘桃花位:
@@ -136,7 +138,7 @@
     <!--袁天罡-->
     <el-row :gutter="1">
       <el-col :span="4" class="yuanTianGang"> 袁天罡称骨:</el-col>
-      <el-col :span="16" class="yuanTianGang" style="text-align: left; font-size: 15px">
+      <el-col :span="16" class="yuanTianGang" style="text-align: left; font-size: 13px">
         {{ eightData.yuanTianGang }}
       </el-col>
     </el-row>
@@ -184,7 +186,8 @@ let eightData = reactive<EightGodVO>({
   yearZhiColor: '',
   zhiHiddenGanList: [],
   zhiSyzygyStatus: '',
-  yuanTianGang: ''
+  yuanTianGang: '',
+  fateStart: ''
 })
 
 // 查询菜单数据
@@ -254,9 +257,8 @@ onMounted(() => {
   width: 100%;
 
   .topColum {
-    //height: 40px;
+    height: 40px;
     background-color: rgb(164, 166, 169);
-    //border: 1px solid rgb(167, 160, 160);
   }
   .godColum {
     height: 40px;
@@ -267,7 +269,6 @@ onMounted(() => {
     background-color: rgb(164, 166, 169);
     font-size: 22px;
     font-weight: bold;
-    // border: 1px solid rgb(167, 160, 160);
   }
   .hiddeColum {
     background-color: rgb(229, 233, 242);
@@ -313,7 +314,7 @@ onMounted(() => {
   margin-bottom: 0px;
 }
 .el-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0px;
 }
 .el-col {
   line-height: 40px;

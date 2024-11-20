@@ -160,6 +160,11 @@ export interface EightGodVO {
   literature: string
 
   /**
+   * 起运时间
+   */
+  fateStart: string
+
+  /**
    * 袁天罡称骨
    */
   yuanTianGang: string

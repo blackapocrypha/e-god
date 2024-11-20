@@ -635,7 +635,7 @@ onMounted(() => {
   margin-bottom: 0px;
 }
 .el-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0px;
 }
 .el-col {
   line-height: 40px;

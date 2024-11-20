@@ -7,7 +7,9 @@ import com.divination.domain.dto.UserTimeDTO;
 import com.divination.domain.vo.*;
 import com.divination.service.EightGodService;
 import com.divination.util.*;
+import com.nlf.calendar.JieQi;
 import com.nlf.calendar.Lunar;
+import com.nlf.calendar.eightchar.Yun;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -88,11 +90,25 @@ public class EightGodServiceImpl implements EightGodService {
         fallList.add(GanUtil.getFall(godVO.getTimeGan() + godVO.getTimeZhi()));
         godVO.setFallList(fallList);
 
-        // 8 取桃花位 和 文昌位 和 袁天罡称骨口诀
+        // 8 取桃花位 和 文昌位 和 袁天罡称骨口诀 和起运时间
         godVO.setLoveInHome(LoveUtil.getLove(godVO.getDayZhi()));
         godVO.setLoveInSociety(LoveUtil.getLove(godVO.getYearZhi()));
         godVO.setLiterature(GodInLiteratureUtil.getGodInLiterature(godVO.getDayGan()) + "," + GodInLiteratureUtil.getGodInLiterature(godVO.getYearGan()));
         godVO.setYuanTianGang(YuanTianGangUtil.getYuanTianGang(userBirthDTO.getBirth(),userBirthDTO.getGender()));
+
+        Yun yun = lunar.getEightChar().getYun(userBirthDTO.getGender());
+        StringBuilder fateStart = new StringBuilder("出生");
+        if(yun.getStartYear()!=0){
+            fateStart.append(yun.getStartYear()+"年");
+        }
+        if(yun.getStartMonth()!=0){
+            fateStart.append(yun.getStartMonth()+"个月");
+        }
+        if(yun.getStartDay()!=0){
+            fateStart.append(yun.getStartDay()+"天");
+        }
+        fateStart.append("后起大运");
+        godVO.setFateStart(fateStart.toString());
 
         jsonResult.buildTrue();
         jsonResult.setData(godVO);

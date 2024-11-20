@@ -155,4 +155,9 @@ public class EightGodVO {
      */
     private String yuanTianGang;
 
+    /**
+     * 起大运时间
+     */
+    private String fateStart;
+
 }
