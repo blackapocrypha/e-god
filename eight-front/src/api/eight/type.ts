@@ -168,6 +168,11 @@ export interface EightGodVO {
    * 袁天罡称骨
    */
   yuanTianGang: string
+
+  /**
+   * 格局
+   */
+  structure: string
   [property: string]: any
 }
 

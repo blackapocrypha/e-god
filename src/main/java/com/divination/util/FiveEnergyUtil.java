@@ -207,4 +207,84 @@ public class FiveEnergyUtil {
 
         return 0;
     }
+
+    /**
+     * 获取五行旺相休囚死状态
+     * @param energy    目标五行
+     * @param lord      坐标系五行
+     * @return
+     */
+    public static String getProsperityAndDecline(String energy,String lord){
+        // 获取参照系的五行关系
+        Map<String, String> statusByThisEnergy = getEnergyStatusByThisEnergy(lord);
+        if(statusByThisEnergy.get("同我").equals(energy)){
+            return "旺";
+        }else if(statusByThisEnergy.get("我生").equals(energy)){
+            return "相";
+        }
+        else if(statusByThisEnergy.get("生我").equals(energy)){
+            return "休";
+        }
+        else if(statusByThisEnergy.get("克我").equals(energy)){
+            return "囚";
+        }else{
+            return "死";
+        }
+    }
+
+    /**
+     * 获取该天干的五行在命局中的得分
+     * @param lunar
+     * @param gan   目标天干
+     * @return
+     */
+    public static Integer getEnergyScore(Lunar lunar,String gan){
+        Integer score = 0;
+        // 得令加40分。月干日干得令加12分，其他加8分
+
+        // 获取对应天干的五行
+        String fiveEnergyByGan = getFiveEnergyByGan(gan);
+        String fiveEnergyByMonth = getFiveEnergyByZhi(lunar.getMonthZhi());
+        String prosperityAndDecline = getProsperityAndDecline(fiveEnergyByGan, fiveEnergyByMonth);
+        if(prosperityAndDecline.equals("旺") || prosperityAndDecline.equals("相")){
+            score+=40;
+        }else{
+            score-=40;
+        }
+
+        // 分别计算其他天干
+        String yearGan = lunar.getYearGan();
+        String monthGan = lunar.getMonthGan();
+        String dayGan = lunar.getDayGan();
+        String timeGan = lunar.getTimeGan();
+        String yearGanStatus = getProsperityAndDecline(fiveEnergyByGan, getFiveEnergyByGan(yearGan));
+        if(yearGanStatus.equals("旺") || yearGanStatus.equals("相")){
+            score+=8;
+        }else{
+            score-=8;
+        }
+
+        String mGanStatus = getProsperityAndDecline(fiveEnergyByGan, getFiveEnergyByGan(monthGan));
+        if(mGanStatus.equals("旺") || mGanStatus.equals("相")){
+            score+=12;
+        }else{
+            score-=12;
+        }
+
+        String dGanStatus = getProsperityAndDecline(fiveEnergyByGan, getFiveEnergyByGan(dayGan));
+        if(dGanStatus.equals("旺") || dGanStatus.equals("相")){
+            score+=12;
+        }else{
+            score-=12;
+        }
+
+        String tGanStatus = getProsperityAndDecline(fiveEnergyByGan, getFiveEnergyByGan(timeGan));
+        if(tGanStatus.equals("旺") || tGanStatus.equals("相")){
+            score+=8;
+        }else{
+            score-=8;
+        }
+
+        return score;
+    }
 }

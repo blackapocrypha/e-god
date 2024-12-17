@@ -160,4 +160,9 @@ public class EightGodVO {
      */
     private String fateStart;
 
+    /**
+     * 格局
+     */
+    private String structure;
+
 }

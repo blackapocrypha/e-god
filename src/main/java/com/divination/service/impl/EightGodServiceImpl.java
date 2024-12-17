@@ -90,7 +90,7 @@ public class EightGodServiceImpl implements EightGodService {
         fallList.add(GanUtil.getFall(godVO.getTimeGan() + godVO.getTimeZhi()));
         godVO.setFallList(fallList);
 
-        // 8 取桃花位 和 文昌位 和 袁天罡称骨口诀 和起运时间
+        // 8 取桃花位 和 文昌位 和 袁天罡称骨口诀 和起运时间 和格局
         godVO.setLoveInHome(LoveUtil.getLove(godVO.getDayZhi()));
         godVO.setLoveInSociety(LoveUtil.getLove(godVO.getYearZhi()));
         godVO.setLiterature(GodInLiteratureUtil.getGodInLiterature(godVO.getDayGan()) + "," + GodInLiteratureUtil.getGodInLiterature(godVO.getYearGan()));
@@ -109,6 +109,7 @@ public class EightGodServiceImpl implements EightGodService {
         }
         fateStart.append("后起大运");
         godVO.setFateStart(fateStart.toString());
+        godVO.setStructure(TenGodUtil.getTenGodStructure(lunar));
 
         jsonResult.buildTrue();
         jsonResult.setData(godVO);

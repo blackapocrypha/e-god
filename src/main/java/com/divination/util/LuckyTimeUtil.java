@@ -68,9 +68,7 @@ public class LuckyTimeUtil {
         if(monthNum!=0){
             beginLuckDate =  DateUtil.offsetMonth(beginLuckDate,monthNum);
         }
-//        if(betweenHour!=0){
-//            beginLuckDate =  DateUtil.offsetMonth(beginLuckDate,monthNum);
-//        }
+
         Integer beginLuckyYear = DateUtil.year(beginLuckDate);
         Integer beginLuckyYearEnd = beginLuckyYear+10;
 

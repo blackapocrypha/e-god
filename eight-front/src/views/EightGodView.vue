@@ -35,6 +35,9 @@
           <template #content>
             {{ eightData.fateStart }}
             <br />
+            格局:
+            {{ eightData.structure }}格
+            <br />
             文昌位：
             {{ eightData.literature }}
             <br />姻缘桃花位:
@@ -129,7 +132,7 @@
 
     <!--地支合化-->
     <el-row :gutter="1">
-      <el-col :span="4" class="zhiStatusColum"> 地支合化:</el-col>
+      <el-col :span="4" class="zhiStatusColum" style="height: 80px"> 地支合化:</el-col>
       <el-col :span="16" class="zhiStatusColum" style="text-align: left">
         {{ eightData.zhiSyzygyStatus }}
       </el-col>
@@ -187,7 +190,8 @@ let eightData = reactive<EightGodVO>({
   zhiHiddenGanList: [],
   zhiSyzygyStatus: '',
   yuanTianGang: '',
-  fateStart: ''
+  fateStart: '',
+  structure: ''
 })
 
 // 查询菜单数据
@@ -302,7 +306,6 @@ onMounted(() => {
     background-color: rgb(229, 233, 242);
   }
   .zhiStatusColum {
-    height: 40px;
     background-color: rgb(164, 166, 169);
   }
   .yuanTianGang {

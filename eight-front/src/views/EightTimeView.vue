@@ -156,7 +156,7 @@
     </el-row>
 
     <!--地支合化-->
-    <el-row :gutter="1">
+    <el-row :gutter="1" style="height: 80px">
       <el-col :span="4" class="zhiStatusColum"> 地支合化:</el-col>
       <el-col :span="16" class="zhiStatusColum" style="text-align: left">
         {{ eightData.zhiSyzygyStatus }}
@@ -311,6 +311,7 @@ const getFullDays = async (year: number) => {
     fullYearMonthDaysArray.value.forEach((element) => {
       if (userInfoData.month == element.month) {
         fullDays.value.length = 0
+        //@ts-ignore
         fullDays.value = [...element.days]
         return
       }
@@ -546,6 +547,23 @@ onMounted(() => {
   height: 100%;
   width: 100%;
 
+  .my-scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .my-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #ccc;
+  }
+
+  .my-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background: #ededed;
+  }
+
   .scrollable-container {
     width: 100%; /* 根据需要调整容器宽度 */
     overflow-x: auto; /* 当内容超出容器宽度时显示滚动条 */
@@ -628,6 +646,7 @@ onMounted(() => {
     background-color: rgb(164, 166, 169);
   }
   .zhiStatusColum {
+    word-wrap: break-word;
     background-color: rgb(229, 233, 242);
   }
 }
