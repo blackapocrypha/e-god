@@ -1,9 +1,7 @@
 package com.divination.util;
 
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
-import com.alibaba.fastjson2.JSON;
 import com.divination.domain.dto.UserBirthDTO;
 import com.divination.domain.vo.TimeLuckyVO;
 import com.nlf.calendar.JieQi;
