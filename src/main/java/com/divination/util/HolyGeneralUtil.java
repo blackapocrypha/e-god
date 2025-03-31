@@ -310,6 +310,7 @@ public class HolyGeneralUtil {
 
         /**
          * 太极贵人
+         * 以年干或日干看地支，是甲或乙的地支再遇到子或午，是丙或丁的地支再遇到卯或酉，是戊或己的地支再遇到辰或戌或丑或未，是庚或辛的地支再遇到寅或亥，是壬或癸的地支再遇到巳或申
          */
         for (String gan : yearDayGanList) {
             if(Arrays.asList("甲","乙").contains(gan)){
@@ -404,7 +405,7 @@ public class HolyGeneralUtil {
                     }
                 }
             }
-            else if(Arrays.asList("已","酉","丑").contains(zhi)){
+            else if(Arrays.asList("巳","酉","丑").contains(zhi)){
                 for (int i = 0; i < zhiList.size(); i++) {
                     if("午".equals(zhiList.get(i))){
                         list.get(i).add("桃花");
