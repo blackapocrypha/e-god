@@ -78,8 +78,8 @@ public class GanUtil {
         }
         else if("丑".equals(zhi)){
             vo.setHeight("己");
-            vo.setMiddle("辛");
-            vo.setLow("癸");
+            vo.setMiddle("癸");
+            vo.setLow("辛");
         }
         else if("寅".equals(zhi)){
             vo.setHeight("甲");
