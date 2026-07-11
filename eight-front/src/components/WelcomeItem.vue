@@ -1,87 +1,90 @@
 <template>
   <div class="item">
-    <i>
+    <div class="icon-wrapper">
       <slot name="icon"></slot>
-    </i>
+    </div>
     <div class="details">
-      <h3>
+      <h3 class="heading">
         <slot name="heading"></slot>
       </h3>
-      <slot></slot>
+      <div class="content">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .item {
-  margin-top: 2rem;
   display: flex;
-  position: relative;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-normal) var(--ease-out-quart),
+    border-color var(--duration-normal) var(--ease-out-quart),
+    transform var(--duration-normal) var(--ease-out-quart);
+}
+
+.item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
+  transform: translateY(-1px);
+}
+
+.icon-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.icon-wrapper :deep(svg) {
+  width: 22px;
+  height: 22px;
 }
 
 .details {
   flex: 1;
-  margin-left: 1rem;
+  min-width: 0;
 }
 
-i {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-
+.heading {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
   color: var(--color-text);
+  margin-bottom: var(--space-sm);
+  line-height: var(--leading-tight);
 }
 
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: var(--color-heading);
+.heading :deep(a) {
+  color: var(--color-primary);
+  font-weight: var(--weight-medium);
+}
+
+.content {
+  font-size: var(--text-sm);
+  color: var(--color-text-soft);
+  line-height: var(--leading-relaxed);
+}
+
+.content :deep(a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (min-width: 1024px) {
   .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
-  }
-
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
+    margin-bottom: var(--space-md);
   }
 }
 </style>

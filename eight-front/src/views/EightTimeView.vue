@@ -1,204 +1,186 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <!-- eslint-disable vue/valid-v-for -->
 <template>
-  <div class="all">
-    <div style="float: right; margin-bottom: 10px">
-      <el-tooltip class="box-item" effect="dark" content="月份具体以节令划分为准" placement="top">
-        <el-button size="large" @click="openDialog">流月流日</el-button>
-      </el-tooltip>
+  <div class="eight-time-view">
+    <div class="page-toolbar">
+      <h2 class="page-title">大运流年</h2>
     </div>
-    <!--四柱-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="topColum"> 时间:</el-col>
-      <el-col :span="2" class="topColum"> 流日</el-col>
-      <el-col :span="2" class="topColum"> 流月</el-col>
-      <el-col :span="2" class="topColum"> 流年</el-col>
-      <el-col :span="2" class="topColum"> 大运</el-col>
-      <el-col :span="2" class="topColum"> 年柱</el-col>
-      <el-col :span="2" class="topColum"> 月柱</el-col>
-      <el-col :span="2" class="topColum"> 日元</el-col>
-      <el-col :span="2" class="topColum"> 时柱</el-col>
-    </el-row>
 
-    <!--十神-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="godColum"> 十神:</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.timeDayGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.timeMonthGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.timeYearGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.timeLuckyGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.yearGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.monthGan) }}</el-col>
-      <el-col :span="2" class="godColum"> {{ eightData.gender }}</el-col>
-      <el-col :span="2" class="godColum"> {{ findTenGod(eightData.timeGan) }}</el-col>
-    </el-row>
+    <!-- ===== 核心表格 ===== -->
+    <div class="table-card">
+      <div class="card-header">
+        <span class="card-title">八字运程详批</span>
+      </div>
 
-    <!--天干-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="topColum" style="font-size: 16px"> 天干:</el-col>
-      <el-col :span="2" class="ganColum" :style="eightData.timeDayGanColor">
-        {{ eightData.timeDayGan }}
-      </el-col>
-      <el-col :span="2" class="ganColum" :style="eightData.timeMonthGanColor">
-        {{ eightData.timeMonthGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeYearGanColor">
-        {{ eightData.timeYearGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeLuckyGanColor">
-        {{ eightData.timeLuckyGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.yearGanColor">
-        {{ eightData.yearGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.monthGanColor">
-        {{ eightData.monthGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.dayGanColor">
-        {{ eightData.dayGan }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeGanColor">
-        {{ eightData.timeGan }}</el-col
-      >
-    </el-row>
+      <!-- 表头 -->
+      <div class="table-row table-header">
+        <div class="table-label">时间</div>
+        <div class="table-cell">流日</div>
+        <div class="table-cell">流月</div>
+        <div class="table-cell">流年</div>
+        <div class="table-cell">大运</div>
+        <div class="table-cell">年柱</div>
+        <div class="table-cell">月柱</div>
+        <div class="table-cell highlight">日元</div>
+        <div class="table-cell">时柱</div>
+      </div>
 
-    <!--地支-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="topColum" style="font-size: 16px"> 地支:</el-col>
-      <el-col :span="2" class="ganColum" :style="eightData.timeDayZhiColor">
-        {{ eightData.timeDayZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeMonthZhiColor">
-        {{ eightData.timeMonthZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeYearZhiColor">
-        {{ eightData.timeYearZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeLuckyZhiColor">
-        {{ eightData.timeLuckyZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.yearZhiColor">
-        {{ eightData.yearZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.monthZhiColor">
-        {{ eightData.monthZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.dayZhiColor">
-        {{ eightData.dayZhi }}</el-col
-      >
-      <el-col :span="2" class="ganColum" :style="eightData.timeZhiColor">
-        {{ eightData.timeZhi }}</el-col
-      >
-    </el-row>
+      <!-- 十神 -->
+      <div class="table-row row-alt">
+        <div class="table-label label-secondary">十神</div>
+        <div class="table-cell">{{ findTenGod(eightData.timeDayGan) }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.timeMonthGan) }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.timeYearGan) }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.timeLuckyGan) }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.yearGan) }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.monthGan) }}</div>
+        <div class="table-cell highlight">{{ eightData.gender }}</div>
+        <div class="table-cell">{{ findTenGod(eightData.timeGan) }}</div>
+      </div>
 
-    <!--藏干-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="hiddeColum"> 藏干:</el-col>
-      <el-col :span="2" class="hiddeColum" v-for="item in eightData.zhiHiddenGanList">
-        <el-row class="hiddenGan">
-          <el-col class="hiddenGanString"> {{ item.heightGodName }}</el-col>
-          <el-col class="hiddenGanString" v-show="item.middle != null">
-            {{ item.middleGodName }}</el-col
+      <!-- 天干 -->
+      <div class="table-row">
+        <div class="table-label label-primary">天干</div>
+        <div class="table-cell gan-cell" :style="eightData.timeDayGanColor">{{ eightData.timeDayGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeMonthGanColor">{{ eightData.timeMonthGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeYearGanColor">{{ eightData.timeYearGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeLuckyGanColor">{{ eightData.timeLuckyGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.yearGanColor">{{ eightData.yearGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.monthGanColor">{{ eightData.monthGan }}</div>
+        <div class="table-cell highlight gan-cell" :style="eightData.dayGanColor">{{ eightData.dayGan }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeGanColor">{{ eightData.timeGan }}</div>
+      </div>
+
+      <!-- 地支 -->
+      <div class="table-row">
+        <div class="table-label label-primary">地支</div>
+        <div class="table-cell gan-cell" :style="eightData.timeDayZhiColor">{{ eightData.timeDayZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeMonthZhiColor">{{ eightData.timeMonthZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeYearZhiColor">{{ eightData.timeYearZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeLuckyZhiColor">{{ eightData.timeLuckyZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.yearZhiColor">{{ eightData.yearZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.monthZhiColor">{{ eightData.monthZhi }}</div>
+        <div class="table-cell highlight gan-cell" :style="eightData.dayZhiColor">{{ eightData.dayZhi }}</div>
+        <div class="table-cell gan-cell" :style="eightData.timeZhiColor">{{ eightData.timeZhi }}</div>
+      </div>
+
+      <!-- 藏干 -->
+      <div class="table-row row-alt">
+        <div class="table-label label-secondary">藏干</div>
+        <div class="table-cell hidden-gan-col" v-for="item in eightData.zhiHiddenGanList">
+          <div class="hidden-gan-list">
+            <span class="hg-item" v-show="item.heightGodName">{{ item.heightGodName }}</span>
+            <span class="hg-item" v-show="item.middleGodName">{{ item.middleGodName }}</span>
+            <span class="hg-item" v-show="item.lowGodName">{{ item.lowGodName }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 大运选择 ===== -->
+    <div class="table-card section-card">
+      <div class="card-header">
+        <span class="card-title">十年大运</span>
+      </div>
+      <div class="scrollable-container">
+        <div class="lucky-grid">
+          <div
+            v-for="(item, index) in eightData.tenLuckyList"
+            :key="index"
+            class="lucky-item"
+            :class="{ active: selectedLuckyIndex === index }"
+            @click="pickLucky(index, item.name, 1)"
           >
-          <el-col class="hiddenGanString" v-show="item.low != null"> {{ item.lowGodName }}</el-col>
-        </el-row>
-      </el-col>
-    </el-row>
+            <span class="lucky-ganzhi">{{ item.name }}</span>
+            <span class="lucky-years">{{ item.startYear }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!--大运-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="tenColum"> 大运:</el-col>
-      <el-col :span="2" class="tenColum" v-for="(item, index) in eightData.tenLuckyList">
-        <span
-          class="pointer"
-          :style="selectedLuckyIndex === index ? 'color: blue' : 'color: rgb(44, 62, 80)'"
-          @click="pickLucky(index, item.name, 1)"
-        >
-          {{ item.name }}
-        </span>
-      </el-col>
-    </el-row>
-    <el-row :gutter="1">
-      <el-col :span="4" class="tenColum"></el-col>
-      <el-col :span="2" class="tenColum" v-for="item in eightData.tenLuckyList">
-        {{ item.startYear }}
-      </el-col>
-    </el-row>
-
-    <!--流年-->
-    <div class="scrollable-container">
-      <el-row :gutter="1">
-        <el-col :span="4" class="flowYearColum"> 流年:</el-col>
-        <el-col :span="2" class="flowYearColum" v-for="(item, index) in eightData.flowYearList">
-          <span
-            class="pointer"
-            :style="selectedFlowYearIndex === index ? 'color: blue' : 'color: rgb(44, 62, 80)'"
+    <!-- ===== 流年选择 ===== -->
+    <div class="table-card section-card">
+      <div class="card-header">
+        <span class="card-title">流年</span>
+      </div>
+      <div class="scrollable-container">
+        <div class="lucky-grid">
+          <div
+            v-for="(item, index) in eightData.flowYearList"
+            :key="index"
+            class="lucky-item"
+            :class="{ active: selectedFlowYearIndex === index }"
             @click="pickFlowYear(index, item.name, 1)"
           >
-            {{ item.name }}</span
-          >
-        </el-col>
-      </el-row>
-      <el-row :gutter="1">
-        <el-col :span="4" class="flowYearColum"></el-col>
-        <el-col :span="2" class="flowYearColum" v-for="item in eightData.flowYearList">
-          {{ item.startYear }}
-        </el-col>
-      </el-row>
+            <span class="lucky-ganzhi">{{ item.name }}</span>
+            <span class="lucky-years">{{ item.startYear }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!--天干合化-->
-    <el-row :gutter="1">
-      <el-col :span="4" class="ganStatusColum"> 天干合化:</el-col>
-      <el-col :span="16" class="ganStatusColum" style="text-align: left">
-        {{ eightData.ganSyzygyStatus }}
-      </el-col>
-    </el-row>
+    <!-- ===== 流月选择（仅选了流年后显示） ===== -->
+    <div v-if="fullYearMonthDaysArray.length > 0" class="table-card section-card">
+      <div class="card-header">
+        <span class="card-title">流月</span>
+        <span class="card-hint">以节令划分为准</span>
+      </div>
+      <div class="scrollable-container">
+        <div class="lucky-grid">
+          <div
+            v-for="(item, index) in fullYearMonthDaysArray"
+            :key="item.month"
+            class="lucky-item"
+            :class="{ active: selectedFlowMonthIndex === index }"
+            @click="pickFlowMonth(item.month, item.monthGanZhi)"
+          >
+            <span class="lucky-ganzhi">{{ item.monthGanZhi }}</span>
+            <span class="lucky-years">{{ item.month }}月</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!--地支合化-->
-    <el-row :gutter="1" style="height: 80px">
-      <el-col :span="4" class="zhiStatusColum"> 地支合化:</el-col>
-      <el-col :span="16" class="zhiStatusColum" style="text-align: left">
-        {{ eightData.zhiSyzygyStatus }}
-      </el-col>
-    </el-row>
+    <!-- ===== 流日选择（仅选了流月后显示） ===== -->
+    <div v-if="fullDays.length > 0" class="table-card section-card">
+      <div class="card-header">
+        <span class="card-title">流日</span>
+        <span class="card-hint">所选月份内</span>
+      </div>
+      <div class="scrollable-container">
+        <div class="lucky-grid">
+          <div
+            v-for="(item, index) in fullDays"
+            :key="item.date"
+            class="lucky-item"
+            :class="{ active: selectedFlowDayIndex === index }"
+            @click="pickFlowDay(item.date, item.dayGanZhi)"
+          >
+            <span class="lucky-ganzhi">{{ item.dayGanZhi }}</span>
+            <span class="lucky-years">{{ item.date?.substring(5, 10) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 合化 ===== -->
+    <div class="table-card section-card">
+      <div class="table-row row-full">
+        <div class="table-label label-primary">天干合化</div>
+        <div class="table-cell full-cell">{{ eightData.ganSyzygyStatus }}</div>
+      </div>
+      <div class="table-row row-full">
+        <div class="table-label label-primary">地支合化</div>
+        <div class="table-cell full-cell">{{ eightData.zhiSyzygyStatus }}</div>
+      </div>
+    </div>
   </div>
 
-  <el-dialog v-model="dialogFormVisible" title="流月流日" width="700">
-    <template #footer>
-      <el-form label-width="auto">
-        <el-form-item label="流月">
-          <el-radio-group v-model="userInfoData.month">
-            <el-radio
-              v-for="item in fullYearMonthDaysArray"
-              @click="freshFlowDayWhenChosenMonth()"
-              :value="item.month"
-              >{{ item.monthGanZhi }}({{ item.month }}月)</el-radio
-            >
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="流日">
-          <el-radio-group v-model="specialFLowDay">
-            <el-radio style="width: 120px" v-for="item in fullDays" :value="item.date"
-              >{{ item.dayGanZhi }} ({{ item.date?.substring(5, 10) }})</el-radio
-            >
-          </el-radio-group>
-        </el-form-item>
-        <br />
-      </el-form>
-
-      <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="getDayLucky()"> 确定 </el-button>
-      </div>
-    </template>
-  </el-dialog>
 </template>
 
 <script setup lang="ts">
 //@ts-ignore
 import { onMounted, reactive, watchEffect, ref } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useInfoStore } from '@/stores/info'
 import { REQ_SUCCESS } from '@/util/resultStatus'
 import type { jsonResult } from '@/api/common/type'
@@ -215,13 +197,10 @@ const selectedLuckyIndex = ref<number>()
 const selectedFlowYearIndex = ref<number | any>()
 const selectedFlowMonthIndex = ref<number>()
 const selectedFlowDayIndex = ref<number>()
-const specialFLowDay = ref<string | any>()
 
-const dialogFormVisible = ref(false)
 const fullYearMonthDaysArray = ref<FullYearMonthDaysVO[]>([])
 const fullDays = ref<TimeLuckyMonthDayVO[]>([])
 
-// 查询数据
 let userInfoData = reactive<userTimeInfo>({
   birth: info.birth,
   gender: info.gender,
@@ -260,7 +239,6 @@ let eightData = reactive<EightGodTimeVO>({
   timeYearZhi: '',
   timeDayGan: '',
   timeDayZhi: '',
-
   timeLuckyGanColor: '',
   timeLuckyZhiColor: '',
   timeMonthGanColor: '',
@@ -277,92 +255,41 @@ let eightData = reactive<EightGodTimeVO>({
   flowDayList: []
 })
 
-// 查询菜单数据
 const getLucky = async (queryData: userTimeInfo) => {
-  dialogFormVisible.value = false
   //@ts-ignore
   let result: jsonResult | any = await apiGetLucky(queryData)
   clearEightData(eightData)
   if (result.status === REQ_SUCCESS) {
     //@ts-ignore
     Object.assign(eightData, result.data)
-    // 单独载入大运、流年月日等干支
     if (eightData.timeLuckyGan != null) {
       userInfoData.lucky = eightData.timeLuckyGan + eightData.timeLuckyZhi
     }
     eightData.monthGan = result.data.monthGan
     eightData.monthZhi = result.data.monthZhi
   }
-
   findLuckyZone()
   findFlowYearZone()
-  findFlowMonthZone()
-  findFlowDayZone()
 }
 
-// 查询今年流月流日数据
 const getFullDays = async (year: number) => {
   //@ts-ignore
   let result: jsonResult | any = await getFullYearMonthDays(year)
   if (result.status === REQ_SUCCESS) {
-    fullYearMonthDaysArray.value.length = 0
-    //@ts-ignore
     fullYearMonthDaysArray.value = [...result.data]
+    // 自动选中当前月份（或保持已有选中）
+    findFlowMonthZone()
+    // 根据选中月份加载流日
     fullYearMonthDaysArray.value.forEach((element) => {
       if (userInfoData.month == element.month) {
-        fullDays.value.length = 0
-        //@ts-ignore
         fullDays.value = [...element.days]
+        findFlowDayZone()
         return
       }
     })
   }
 }
 
-// 当查询流日时单独处理日期
-const getDayLucky = () => {
-  if (specialFLowDay.value == null) {
-    ElMessage({
-      message: '请选择流日',
-      type: 'warning'
-    })
-  } else {
-    const dateObject = new Date(specialFLowDay.value)
-    userInfoData.year = dateObject.getFullYear()
-    userInfoData.month = dateObject.getMonth() + 1
-    userInfoData.day = dateObject.getDate()
-    getLucky(userInfoData)
-  }
-}
-
-// 选中月份时同步更新流日
-const freshFlowDayWhenChosenMonth = async () => {
-  //@ts-ignore
-  let result: jsonResult | any = await apiGetLucky(userInfoData)
-  clearEightData(eightData)
-  if (result.status === REQ_SUCCESS) {
-    //@ts-ignore
-    Object.assign(eightData, result.data)
-    // 单独载入大运、流年月日等干支
-    if (eightData.timeLuckyGan != null) {
-      userInfoData.lucky = eightData.timeLuckyGan + eightData.timeLuckyZhi
-    }
-  }
-  specialFLowDay.value = null
-  findLuckyZone()
-  findFlowYearZone()
-  findFlowMonthZone()
-  findFlowDayZone()
-  fullYearMonthDaysArray.value.forEach((element) => {
-    if (userInfoData.month == element.month) {
-      fullDays.value.length = 0
-      fullDays.value = [...element.days]
-      return
-    }
-  })
-}
-
-// 根据对应天干找到十神
 const findTenGod = (data: string) => {
   for (let i = 0; i < eightData.tenGodStatusList.length; i++) {
     if (eightData.tenGodStatusList[i].gan === data) {
@@ -371,19 +298,6 @@ const findTenGod = (data: string) => {
   }
 }
 
-// 打开对话框
-const openDialog = () => {
-  if (userInfoData.year == null) {
-    ElMessage({
-      message: '请先选择对应年份',
-      type: 'warning'
-    })
-  } else {
-    dialogFormVisible.value = true
-  }
-}
-
-// 默认选中当前大运所在年份
 const findLuckyZone = () => {
   for (let i = 0; i < eightData.tenLuckyList.length; i++) {
     if (eightData.tenLuckyList[i].name == eightData.timeLuckyGan + eightData.timeLuckyZhi) {
@@ -391,7 +305,7 @@ const findLuckyZone = () => {
     }
   }
 }
-// 默认选中当前流年所在的年份
+
 const findFlowYearZone = () => {
   if (userInfoData.year == null) {
     for (let i = 0; i < eightData.flowYearList.length; i++) {
@@ -409,7 +323,7 @@ const findFlowYearZone = () => {
     }
   }
 }
-// 默认选中当前流月所在的月份
+
 const findFlowMonthZone = () => {
   if (userInfoData.month == null) {
     for (let i = 0; i < fullYearMonthDaysArray.value.length; i++) {
@@ -427,7 +341,7 @@ const findFlowMonthZone = () => {
     }
   }
 }
-// 默认选中当前流日所在的日期
+
 const findFlowDayZone = () => {
   if (userInfoData.day == null) {
     for (let i = 0; i < fullDays.value.length; i++) {
@@ -446,25 +360,29 @@ const findFlowDayZone = () => {
   }
 }
 
-// 选中对应的大运
 const pickLucky = (index: any, data: string | undefined, type: number) => {
   selectedLuckyIndex.value = index
   selectedFlowYearIndex.value = null
+  selectedFlowMonthIndex.value = null
+  selectedFlowDayIndex.value = null
   userInfoData.lucky = data
   userInfoData.year = null
   userInfoData.month = null
   userInfoData.day = null
+  // 清空流月流日数据（切换大运后需重新选年才能加载）
+  fullYearMonthDaysArray.value = []
+  fullDays.value = []
   eightData.timeYearGan = ''
   eightData.timeYearZhi = ''
   eightData.timeMonthGan = ''
   eightData.timeMonthZhi = ''
   eightData.timeDayGan = ''
   eightData.timeDayZhi = ''
-  selectedFlowYearIndex.value = null
   userInfoData.birth = formartDate(info.birth)
   userInfoData.gender = info.gender
   getLucky(userInfoData)
 }
+
 const pickFlowYear = (index: any, data: string | undefined, type: number) => {
   eightData.timeYearGan = ''
   eightData.timeYearZhi = ''
@@ -472,9 +390,12 @@ const pickFlowYear = (index: any, data: string | undefined, type: number) => {
   eightData.timeMonthZhi = ''
   eightData.timeDayGan = ''
   eightData.timeDayZhi = ''
-  specialFLowDay.value = null
-  userInfoData.day = null
   userInfoData.month = null
+  userInfoData.day = null
+  selectedFlowMonthIndex.value = null
+  selectedFlowDayIndex.value = null
+  // 清空流日数据（切换流年后需重新选月才能加载）
+  fullDays.value = []
   selectedFlowYearIndex.value = index
   for (let i = 0; i < eightData.flowYearList.length; i++) {
     if (eightData.flowYearList[i].name === data) {
@@ -487,7 +408,35 @@ const pickFlowYear = (index: any, data: string | undefined, type: number) => {
   getFullDays(userInfoData.year)
 }
 
-// 清空缓存数据
+const pickFlowMonth = (month: number, _ganzhi: string) => {
+  userInfoData.month = month
+  userInfoData.day = null
+  // 找到月份对应索引，更新高亮
+  const idx = fullYearMonthDaysArray.value.findIndex((m) => m.month === month)
+  if (idx >= 0) selectedFlowMonthIndex.value = idx
+  // 刷新流日列表
+  fullYearMonthDaysArray.value.forEach((element) => {
+    if (userInfoData.month == element.month) {
+      fullDays.value = [...element.days]
+    }
+  })
+  selectedFlowDayIndex.value = null
+  // 调用后端刷新排盘
+  getLucky(userInfoData)
+}
+
+const pickFlowDay = (dateStr: string, _ganzhi: string) => {
+  if (!dateStr) return
+  const dateObject = new Date(dateStr)
+  userInfoData.year = dateObject.getFullYear()
+  userInfoData.month = dateObject.getMonth() + 1
+  userInfoData.day = dateObject.getDate()
+  // 找到日期对应索引，更新高亮
+  const idx = fullDays.value.findIndex((d) => d.date === dateStr)
+  if (idx >= 0) selectedFlowDayIndex.value = idx
+  getLucky(userInfoData)
+}
+
 const clearEightData = (eightData: EightGodTimeVO): void => {
   for (const key in eightData) {
     if (typeof eightData[key] === 'string') {
@@ -499,6 +448,7 @@ const clearEightData = (eightData: EightGodTimeVO): void => {
     }
   }
 }
+
 const clearUserInfoData = (userInfoData: userTimeInfo): void => {
   for (const key in userInfoData) {
     if (typeof userInfoData[key] === 'string') {
@@ -509,7 +459,6 @@ const clearUserInfoData = (userInfoData: userTimeInfo): void => {
   }
 }
 
-// 格式化日期
 const formartDate = (date: any) => {
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -520,11 +469,9 @@ const formartDate = (date: any) => {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 
-// 监听数据变化
 watchEffect(() => {
   userInfoData.birth = formartDate(info.birth)
   userInfoData.gender = info.gender
-  //getLucky(userInfoData)
 })
 
 onMounted(() => {
@@ -542,123 +489,260 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
-.all {
-  height: 100%;
+<style lang="scss" scoped>
+.eight-time-view {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
 
-  .my-scroll::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
+/* ===== 页面工具栏 ===== */
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .my-scroll::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    background: #ccc;
-  }
+.page-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: 0.06em;
+}
 
-  .my-scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background: #ededed;
-  }
+/* ===== 表格卡片 (复用 EightGodView 的类) ===== */
+.table-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 
-  .scrollable-container {
-    width: 100%; /* 根据需要调整容器宽度 */
-    overflow-x: auto; /* 当内容超出容器宽度时显示滚动条 */
-  }
-
-  .pointer {
-    cursor: pointer;
-  }
-
-  .monthItem {
-    display: inline-block;
-    width: calc(100% / 12);
-    height: 50px;
-    background-color: lightblue;
-    text-align: center;
-    line-height: 50px;
-  }
-
-  .el-row {
-    width: 120%;
-  }
-
-  .topColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-    //border: 1px solid rgb(167, 160, 160);
-  }
-  .godColum {
-    height: 40px;
-    background-color: rgb(229, 233, 242);
-  }
-  .ganColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-    font-size: 22px;
-    font-weight: bold;
-    // border: 1px solid rgb(167, 160, 160);
-  }
-  .hiddeColum {
-    background-color: rgb(229, 233, 242);
-    height: 86px;
-    .hiddenGan {
-      font-size: 12px;
-      margin-top: 0px;
-      .hiddenGanString {
-        height: 22px;
-      }
-    }
-  }
-
-  .voiceColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-  }
-  .shenShaColum {
-    background-color: rgb(229, 233, 242);
-    p {
-      background-color: rgb(229, 233, 242);
-      height: 24px;
-      line-height: 22px;
-    }
-  }
-  .tenColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-    .pointer {
-      cursor: pointer;
-    }
-  }
-  .flowYearColum {
-    height: 40px;
-    background-color: rgb(229, 233, 242);
-  }
-  .flowMonthColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-  }
-  .ganStatusColum {
-    height: 40px;
-    background-color: rgb(164, 166, 169);
-  }
-  .zhiStatusColum {
-    word-wrap: break-word;
-    background-color: rgb(229, 233, 242);
+  &.section-card {
+    box-shadow: var(--shadow-sm);
   }
 }
-.el-row {
-  margin-bottom: 0px;
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(135deg, var(--color-bg-soft), var(--color-bg-mute));
+  border-bottom: 1px solid var(--color-border-light);
 }
-.el-row:last-child {
-  margin-bottom: 0px;
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  letter-spacing: 0.04em;
 }
-.el-col {
-  line-height: 40px;
+
+.card-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-mute);
+  letter-spacing: 0.02em;
+}
+
+/* ===== 表格行 ===== */
+.table-row {
+  display: grid;
+  grid-template-columns: 64px repeat(8, minmax(64px, 1fr));
+  min-height: 44px;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background-color var(--duration-fast) var(--ease-out-quart);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.row-full {
+    grid-template-columns: 80px 1fr;
+  }
+
+  &.row-alt {
+    background: oklch(96% 0.008 82);
+  }
+
+  &:hover {
+    background: oklch(93% 0.012 82);
+  }
+
+  &.table-header {
+    background: var(--color-primary-light);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-xs);
+    color: var(--color-text-soft);
+
+    &:hover {
+      background: var(--color-primary-light);
+    }
+  }
+}
+
+.table-label {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-soft);
+  background: oklch(93% 0.010 82);
+  border-right: 1px solid var(--color-border-light);
+
+  &.label-secondary { color: var(--color-text-mute); }
+  &.label-primary { color: var(--color-text); }
+}
+
+.table-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text);
   text-align: center;
-  font-size: 16px;
+
+  &.highlight {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-left: 2px solid var(--color-accent);
+      border-right: 2px solid var(--color-accent);
+      border-radius: 2px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+}
+
+.full-cell {
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--text-sm);
+  padding: var(--space-md) var(--space-lg);
+  line-height: var(--leading-relaxed);
+}
+
+.gan-cell {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+}
+
+/* ===== 藏干 ===== */
+.hidden-gan-col {
+  padding: var(--space-xs) !important;
+}
+
+.hidden-gan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 100%;
+}
+
+.hg-item {
+  font-size: 0.65rem;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  padding: 0 2px;
+  text-align: center;
+}
+
+/* ===== 大运 / 流年选择 ===== */
+.scrollable-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: var(--space-md);
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border-hover);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--color-bg-soft);
+    border-radius: 3px;
+  }
+}
+
+.lucky-grid {
+  display: flex;
+  gap: var(--space-sm);
+  min-width: max-content;
+}
+
+.lucky-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-sm) var(--space-md);
+  min-width: 72px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out-quart);
+
+  &:hover {
+    border-color: var(--color-primary-soft);
+    background: var(--color-primary-light);
+  }
+
+  &.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    box-shadow: 0 2px 12px oklch(52% 0.18 25 / 0.25);
+
+    .lucky-ganzhi,
+    .lucky-years {
+      color: #fff;
+    }
+  }
+}
+
+.lucky-ganzhi {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.lucky-years {
+  font-size: var(--text-xs);
+  color: var(--color-text-mute);
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .table-row {
+    grid-template-columns: 48px repeat(8, 1fr);
+  }
+  .table-row.row-full {
+    grid-template-columns: 48px 1fr;
+  }
+  .table-cell {
+    font-size: var(--text-xs);
+    padding: var(--space-xs) 2px;
+  }
+  .gan-cell {
+    font-size: var(--text-sm);
+  }
+  .page-title {
+    font-size: var(--text-xl);
+  }
 }
 </style>

@@ -1,86 +1,183 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* ===== 八字排盘 — 东方雅韵色彩系统 ===== */
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  /* ---- 基调色板：暖色羊皮纸 + 墨色 ---- */
+  --cr-parchment:      oklch(97% 0.008 85);   /* 羊皮纸底 */
+  --cr-parchment-soft: oklch(94% 0.010 82);
+  --cr-parchment-mute: oklch(90% 0.012 78);
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --cr-ink:            oklch(18% 0.008 260);  /* 墨色文字 */
+  --cr-ink-soft:       oklch(35% 0.006 260);
+  --cr-ink-mute:       oklch(55% 0.005 255);
 
-  --vt-c-indigo: #2c3e50;
+  /* ---- 朱砂与金 — 点缀色 ---- */
+  --cr-vermilion:      oklch(52% 0.18 25);     /* 朱砂红 */
+  --cr-vermilion-soft: oklch(65% 0.13 25);
+  --cr-vermilion-light:oklch(88% 0.04 28);
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --cr-gold:           oklch(72% 0.15 88);     /* 古金 */
+  --cr-gold-soft:      oklch(82% 0.10 85);
+  --cr-gold-light:     oklch(92% 0.06 84);
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
+  /* ---- 苍青色 — 冷静辅助 ---- */
+  --cr-cerulean:       oklch(55% 0.08 230);
+  --cr-cerulean-soft:  oklch(78% 0.04 228);
+  --cr-cerulean-light: oklch(92% 0.02 225);
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  /* ---- 玉色 — 柔和点缀 ---- */
+  --cr-jade:           oklch(58% 0.12 165);
+  --cr-jade-soft:      oklch(78% 0.08 162);
+  --cr-jade-light:     oklch(92% 0.04 160);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  /* ===== 语义 Token ===== */
+  --color-bg:           var(--cr-parchment);
+  --color-bg-soft:      var(--cr-parchment-soft);
+  --color-bg-mute:      var(--cr-parchment-mute);
+  --color-bg-elevated:  #ffffff;
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-text:         var(--cr-ink);
+  --color-text-soft:    var(--cr-ink-soft);
+  --color-text-mute:    var(--cr-ink-mute);
 
+  --color-primary:      var(--cr-vermilion);
+  --color-primary-hover:oklch(45% 0.18 25);
+  --color-primary-soft: var(--cr-vermilion-soft);
+  --color-primary-light:var(--cr-vermilion-light);
+  --color-accent:       var(--cr-gold);
+  --color-accent-soft:  var(--cr-gold-soft);
+  --color-accent-light: var(--cr-gold-light);
+
+  --color-info:         var(--cr-cerulean);
+  --color-info-soft:    var(--cr-cerulean-soft);
+  --color-info-light:   var(--cr-cerulean-light);
+
+  --color-success:      var(--cr-jade);
+  --color-success-light:var(--cr-jade-light);
+
+  /* ---- 边框 ---- */
+  --color-border:       oklch(85% 0.012 80);
+  --color-border-light: oklch(92% 0.008 82);
+  --color-border-hover: oklch(65% 0.015 78);
+
+  /* ===== 间距系统 (4pt base) ===== */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+  --space-3xl:  64px;
+
+  /* ===== 排版 ===== */
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2rem;
+  --text-3xl:  2.75rem;
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.6;
+  --leading-relaxed:1.75;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold:600;
+  --weight-bold:   700;
+
+  /* ===== 阴影 ===== */
+  --shadow-sm:  0 1px 2px oklch(0% 0 0 / 0.04);
+  --shadow-md:  0 4px 12px oklch(0% 0 0 / 0.06);
+  --shadow-lg:  0 8px 30px oklch(0% 0 0 / 0.08);
+  --shadow-xl:  0 16px 48px oklch(0% 0 0 / 0.10);
+
+  /* ===== 圆角 ===== */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ===== 过渡 ===== */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:  150ms;
+  --duration-normal:250ms;
+  --duration-slow:  400ms;
+
+  /* ---- 兼容旧变量名的别名 ---- */
+  --color-background:       var(--color-bg);
+  --color-background-soft:  var(--color-bg-soft);
+  --color-background-mute:  var(--color-bg-mute);
+  --color-heading:          var(--color-text);
   --section-gap: 160px;
 }
 
+/* ===== 暗色模式 ===== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-bg:          oklch(14% 0.008 85);
+    --color-bg-soft:     oklch(18% 0.010 82);
+    --color-bg-mute:     oklch(22% 0.012 78);
+    --color-bg-elevated: oklch(24% 0.010 84);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-text:        oklch(90% 0.008 90);
+    --color-text-soft:   oklch(72% 0.006 85);
+    --color-text-mute:   oklch(55% 0.005 82);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-border:      oklch(28% 0.010 80);
+    --color-border-light:oklch(22% 0.008 80);
+
+    --shadow-sm:  0 1px 2px oklch(0% 0 0 / 0.20);
+    --shadow-md:  0 4px 12px oklch(0% 0 0 / 0.30);
+    --shadow-lg:  0 8px 30px oklch(0% 0 0 / 0.40);
+    --shadow-xl:  0 16px 48px oklch(0% 0 0 / 0.50);
   }
 }
 
+/* ===== 全局 Reset ===== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--color-bg);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
   transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    color var(--duration-normal) var(--ease-out-quart),
+    background-color var(--duration-normal) var(--ease-out-quart);
+}
+
+/* 全局 Element Plus 变量覆盖 */
+:root {
+  --el-color-primary:           var(--color-primary);
+  --el-color-primary-light-3:   var(--color-primary-soft);
+  --el-color-primary-light-5:   var(--color-primary-light);
+  --el-color-primary-light-7:   oklch(92% 0.03 28);
+  --el-color-primary-light-8:   oklch(95% 0.02 30);
+  --el-color-primary-light-9:   oklch(97% 0.01 35);
+  --el-color-primary-dark-2:    var(--color-primary-hover);
+
+  --el-border-radius-base:      var(--radius-sm);
+  --el-border-radius-small:     var(--radius-sm);
+  --el-border-radius-round:     var(--radius-xl);
 }

@@ -4,83 +4,126 @@ import LeftIndexTag from '@/components/LeftIndexTag.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.jpg" width="125" height="125" />
-
-    <div class="wrapper">
+  <div class="app-layout">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <img alt="logo" class="logo" src="@/assets/logo.jpg" width="56" height="56" />
+      </div>
       <LeftIndexTag msg="八字排盘" />
-
-      <nav>
-        <RouterLink to="/">主页</RouterLink>
-        <RouterLink to="/yearEight">排盘</RouterLink>
-        <RouterLink to="/timeEight">流年</RouterLink>
+      <nav class="sidebar-nav">
+        <RouterLink to="/" class="nav-link">主页</RouterLink>
+        <RouterLink to="/yearEight" class="nav-link">排盘</RouterLink>
+        <RouterLink to="/timeEight" class="nav-link">流年</RouterLink>
       </nav>
-    </div>
-  </header>
+    </aside>
 
-  <RouterView />
+    <main class="app-main">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.app-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.app-sidebar {
+  position: sticky;
+  top: var(--space-lg);
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) 0;
 }
 
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-out-quart);
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.logo:hover {
+  transform: scale(1.05);
 }
 
-nav a.router-link-exact-active {
+/* 侧边栏底部导航 */
+.sidebar-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  box-shadow: var(--shadow-sm);
+  margin-top: var(--space-sm);
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-soft);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-out-quart);
+}
+
+.nav-link:hover {
   color: var(--color-text);
+  background: var(--color-bg);
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-link.router-link-exact-active {
+  color: #fff;
+  background: var(--color-primary);
+  box-shadow: 0 2px 8px oklch(52% 0.18 25 / 0.25);
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.app-main {
+  flex: 1;
+  min-width: 0;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+/* 移动端：垂直堆叠，导航移回顶部 */
+@media (max-width: 1023px) {
+  .app-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-lg);
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .app-sidebar {
+    position: static;
+    width: 100%;
+    align-items: center;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .sidebar-nav {
+    /* 移动端导航水平居中 */
+    width: auto;
+    margin-top: var(--space-md);
   }
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  .app-main {
+    max-width: none;
   }
 }
 </style>

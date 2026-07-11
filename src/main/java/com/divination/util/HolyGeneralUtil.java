@@ -2217,13 +2217,17 @@ public class HolyGeneralUtil {
         }
 
 
-        //去重,同时最多只显示6个神煞
+// 去重，同时最多只显示6个神煞
         for (int i = 0; i < list.size(); i++) {
             List<String> collect = list.get(i).stream().distinct().collect(Collectors.toList());
-            if(collect.size()>6){
-                collect.subList(6,list.size()).clear();
+
+            // 修复点：这里应该判断的是内层列表 collect 的长度，而不是外层 list 的长度
+            if (collect.size() > 6) {
+                // 保留前6个，清除索引 6 到 collect.size() 之间的所有元素
+                collect.subList(6, collect.size()).clear();
             }
-            list.set(i,collect);
+
+            list.set(i, collect);
         }
         return list;
     }

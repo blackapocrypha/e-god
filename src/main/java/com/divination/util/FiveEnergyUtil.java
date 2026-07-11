@@ -73,7 +73,7 @@ public class FiveEnergyUtil {
         }else if(FiveEnergyEnum.GOLD.getName().equals(fiveEnergyByGan)){
             return "color: gold";
         }else{
-            return "color: Cyan";
+            return "color: DarkBlue";
         }
     }
 
@@ -119,7 +119,7 @@ public class FiveEnergyUtil {
         }else if(FiveEnergyEnum.GOLD.getName().equals(fiveEnergyByZhi)){
             return "color: gold";
         }else{
-            return "color: Cyan";
+            return "color: DarkBlue";
         }
     }
 
