@@ -1,2 +1,10 @@
 server:
   port: 9369
+
+
+langchain4j:
+  open-ai:
+    chat-model:
+      base-url: https://api.deepseek.com
+      api-key:                # 填写你的api key
+      model-name: deepseek-chat

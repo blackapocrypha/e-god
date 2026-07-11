@@ -12,7 +12,8 @@ type FullVO = FullYearMonthDaysVO[]
 enum API {
   GET_EIGHT = '/getEight',
   GET_LUCKY = '/getLucky',
-  GET_FULLDAYS = '/getFullYearMonthDays'
+  GET_FULLDAYS = '/getFullYearMonthDays',
+  CHAT = '/chat'
 }
 
 // 获取八字排盘信息
@@ -41,3 +42,13 @@ export const apiGetLucky = (data: userTimeInfo) => {
 // 获取当前年份全部流月流日
 export const getFullYearMonthDays = (data: number) =>
   request.get<FullVO>(API.GET_FULLDAYS + '?year=' + data)
+
+/**
+ * 打开 AI 对话流式连接（SSE）
+ * @param data 与 getEight 一致的参数：birth、gender
+ * @returns EventSource 实例，调用方负责监听 onmessage / onerror / onclose
+ */
+export const createChatStream = (data: userInfo): EventSource => {
+  const url = `http://127.0.0.1:9369${API.CHAT}?birth=${encodeURIComponent(data.birth)}&gender=${data.gender}`
+  return new EventSource(url)
+}

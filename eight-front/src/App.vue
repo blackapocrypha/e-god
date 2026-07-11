@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import LeftIndexTag from '@/components/LeftIndexTag.vue'
+import AIAssistant from '@/components/AIAssistant.vue'
 </script>
 
 <template>
@@ -21,6 +22,9 @@ import LeftIndexTag from '@/components/LeftIndexTag.vue'
       <RouterView />
     </main>
   </div>
+
+  <!-- AI 助手：全局浮动入口 -->
+  <AIAssistant />
 </template>
 
 <style scoped>

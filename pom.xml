@@ -52,8 +52,46 @@
             <artifactId>hutool-all</artifactId>
             <version>5.8.31</version>
         </dependency>
+
+
+        <!-- LangChain4j 响应式支持模块 -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-reactor</artifactId>
+            <version>1.15.0-beta25</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- 1. LangChain4j Spring Boot Starter 核心依赖 -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-spring-boot-starter</artifactId>
+            <version>1.15.0-beta25</version> <!-- 请根据最新可用版本调整 -->
+        </dependency>
+
+        <!-- 2. 具体的模型适配器（如 OpenAI） -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+            <version>1.15.0-beta25</version>
+        </dependency>
+
     </dependencies>
 
+    <!-- 新增的仓库配置 -->
+    <repositories>
+        <!-- 配置 Maven 中央仓库 -->
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -87,6 +125,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
