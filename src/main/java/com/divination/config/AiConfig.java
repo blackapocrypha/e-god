@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 @Configuration
 public class AiConfig {
 
@@ -28,6 +30,7 @@ public class AiConfig {
                 .baseUrl(baseurl)
                 .apiKey(openaiApiKey)
                 .modelName(modelName)
+                .customParameters(Map.of("thinking", Map.of("type", "disabled")))
                 .build();
     }
 }

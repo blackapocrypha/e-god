@@ -6,5 +6,5 @@ langchain4j:
   open-ai:
     chat-model:
       base-url: https://api.deepseek.com
-      api-key:                # 填写你的api key
-      model-name: deepseek-chat
+      api-key: sk-axxxxxxx   # 填写你的api key
+      model-name: deepseek-v4-flash
