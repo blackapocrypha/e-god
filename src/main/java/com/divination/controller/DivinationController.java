@@ -1,7 +1,6 @@
 package com.divination.controller;
 
 
-import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.divination.domain.dto.UserBirthDTO;
 import com.divination.domain.dto.UserTimeDTO;
@@ -19,10 +18,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @CrossOrigin
@@ -34,7 +31,6 @@ public class DivinationController {
     @Autowired
     private AssistantService assistantService;
 
-    private static ConcurrentHashMap<String,String> cache = new ConcurrentHashMap<>();
 
     /**
      * 获取八字
@@ -70,21 +66,9 @@ public class DivinationController {
             return Flux.just("调用失败");
         }
 
-        // 2. 检查缓存
-        String key = userBirthDTO.getGender() + DateUtil.format(userBirthDTO.getBirth(), "yyyy-MM-dd");
-        String message = cache.get(key);
-
-        // 如果有缓存，直接包装成 Flux 返回
-        if (Objects.nonNull(message)) {
-            return Flux.just(message);
-        } else {
-            cache.clear();
-        }
-
-        // 3. 构建问题
+        // 2. 构建问题
         String question = JSON.toJSONString(result.getData()) + "这是我的结构化数据，请根据这个信息简单批一下这个八字的性格、婚姻、财富、健康等情况";
 
-        // 4. 核心修改：直接返回 Flux 流，无需手动处理线程和 SseEmitter
         return assistantService.chatStreamWithEightMaster(question);
     }
 
